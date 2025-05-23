@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "upload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "@web3-storage/w3up-client": "^17.3.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "fetch-blob": "^4.0.0",
+    "formdata-node": "^6.0.3",
+    "multer": "^2.0.0"
+  }
+}
