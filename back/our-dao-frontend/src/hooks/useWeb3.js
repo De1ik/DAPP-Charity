@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import { contractABI, contractAddress } from "../contracts/contract";
+import { FundraisingBank_ADDRESS, MockUSDT_ADDRESS } from "../contracts/contract";
+import FundraisingBank from "../contracts/FundraisingBank.json";
+import MockUSDT from "../contracts/MockUSDT.json";
 
 export const useWeb3 = () => {
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
-    const [contract, setContract] = useState(null);
+    const [fundraisingContract, setFundraisingContract] = useState(null);
+    const [mockUSDTContract, setMockUSDTContract] = useState(null);
     const [account, setAccount] = useState(null);
 
     useEffect(() => {
@@ -15,11 +18,23 @@ export const useWeb3 = () => {
                     const _provider = new ethers.providers.Web3Provider(window.ethereum);
                     const _accounts = await _provider.send("eth_requestAccounts", []);
                     const _signer = _provider.getSigner();
-                    const _contract = new ethers.Contract(contractAddress, contractABI, _signer);
+
+                    const _fundraising = new ethers.Contract(
+                        FundraisingBank_ADDRESS,
+                        FundraisingBank.abi,
+                        _signer
+                    );
+
+                    const _mockUSDT = new ethers.Contract(
+                        MockUSDT_ADDRESS,
+                        MockUSDT.abi,
+                        _signer
+                    );
 
                     setProvider(_provider);
                     setSigner(_signer);
-                    setContract(_contract);
+                    setFundraisingContract(_fundraising);
+                    setMockUSDTContract(_mockUSDT);
                     setAccount(_accounts[0]);
                 } else {
                     alert("Please install MetaMask!");
@@ -33,6 +48,11 @@ export const useWeb3 = () => {
         connectWallet();
     }, []);
 
-
-    return { provider, signer, contract, account };
+    return {
+        provider,
+        signer,
+        fundraisingContract,
+        mockUSDTContract,
+        account,
+    };
 };
