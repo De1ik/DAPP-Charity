@@ -42,22 +42,27 @@ contract FundraisingBank {
         uint voteDeadline;
         string reportCID;
         Status status;
-        mapping(address => uint) donations;
         address[] donors;
-        mapping(address => bool) daoVotes;
-        mapping(address => string) voteComments;
-        mapping(address => bool) voteRecord;
         uint votesFor;
         uint votesAgainst;
         uint totalVotes;
         bool voteFinalized;
+        uint extensionsUsed;
+        uint maxExtensions;
+        uint minVotes;
     }
 
     uint public campaignCount;
     mapping(uint => Campaign) private campaigns;
+    mapping(uint => mapping(address => uint)) public donations;
+    mapping(uint => mapping(address => bool)) public daoVotes;
+    mapping(uint => mapping(address => string)) public voteComments;
     mapping(address => Validator) public validators;
+    mapping(uint => bool) public appealRequested;
+    mapping(address => uint) public totalCampaigns;
+    mapping(address => uint) public successfulReports;
+
     uint public requiredVotes = 3;
-    uint public quorum = 3;
     int public maxReputation = 100;
     int public minReputation = 0;
 
@@ -70,6 +75,7 @@ contract FundraisingBank {
     event DaoVoted(uint indexed id, address voter, bool approved, string commentCID);
     event ValidatorAdded(address validator);
     event ReputationUpdated(address validator, int reputation);
+    event AppealRequested(uint indexed id);
 
     modifier onlyCreator(uint id) {
         require(msg.sender == campaigns[id].creator, "Not campaign creator");
@@ -100,7 +106,7 @@ contract FundraisingBank {
 
     function createCampaign(string memory category, uint goalAmount, uint durationInSeconds) external {
         require(goalAmount > 0, "Goal must be > 0");
-        // require(durationInSeconds >= 1 days && durationInSeconds <= 30 days, "Duration must be 1-30 days");
+        require(durationInSeconds >= 1 days && durationInSeconds <= 30 days, "Duration must be 1-30 days");
 
         campaignCount++;
         Campaign storage c = campaigns[campaignCount];
@@ -111,6 +117,8 @@ contract FundraisingBank {
         c.confirmDeadline = c.deadline + 3 days;
         c.status = Status.Active;
 
+        totalCampaigns[msg.sender]++;
+
         emit CampaignCreated(campaignCount, msg.sender, goalAmount, c.deadline, category);
     }
 
@@ -119,15 +127,16 @@ contract FundraisingBank {
         Campaign storage c = campaigns[id];
         require(c.collectedAmount + amount <= c.goalAmount, "Donation exceeds goal");
 
-        if (c.donations[msg.sender] == 0) {
+        if (donations[id][msg.sender] == 0) {
             c.donors.push(msg.sender);
         }
 
-        bool success = usdt.transferFrom(msg.sender, address(this), amount);
-        require(success, "Transfer failed");
+        require(usdt.transferFrom(msg.sender, address(this), amount), "Transfer failed");
 
-        c.donations[msg.sender] += amount;
-        c.collectedAmount += amount;
+        unchecked {
+            donations[id][msg.sender] += amount;
+            c.collectedAmount += amount;
+        }
 
         emit DonationReceived(id, msg.sender, amount);
 
@@ -151,9 +160,14 @@ contract FundraisingBank {
             emit CampaignStatusChanged(id, Status.Rejected);
         }
         if (c.status == Status.ReportSubmitted && block.timestamp > c.voteDeadline) {
-            if (c.totalVotes < quorum) {
+            if (c.totalVotes < c.minVotes && c.extensionsUsed < c.maxExtensions) {
+                c.voteDeadline = block.timestamp + 1 days;
+                unchecked { c.extensionsUsed++; }
+            } else if (c.totalVotes < c.minVotes) {
                 c.status = Status.VoteExpired;
                 emit CampaignStatusChanged(id, Status.VoteExpired);
+            } else {
+                finalizeVote(id);
             }
         }
     }
@@ -165,8 +179,7 @@ contract FundraisingBank {
         c.status = Status.Confirmed;
         c.reportDeadline = block.timestamp + 10 days;
 
-        bool success = usdt.transfer(c.creator, c.collectedAmount);
-        require(success, "Transfer to creator failed");
+        require(usdt.transfer(c.creator, c.collectedAmount), "Transfer to creator failed");
 
         emit CampaignStatusChanged(id, Status.Confirmed);
         emit FundsWithdrawn(id, c.creator, c.collectedAmount);
@@ -181,11 +194,10 @@ contract FundraisingBank {
 
         for (uint i = 0; i < c.donors.length; i++) {
             address donor = c.donors[i];
-            uint donated = c.donations[donor];
+            uint donated = donations[id][donor];
             if (donated > 0) {
-                c.donations[donor] = 0;
-                bool success = usdt.transfer(donor, donated);
-                require(success, "Refund failed");
+                donations[id][donor] = 0;
+                require(usdt.transfer(donor, donated), "Refund failed");
                 emit RefundIssued(id, donor, donated);
             }
         }
@@ -199,6 +211,9 @@ contract FundraisingBank {
         c.reportCID = cid;
         c.voteDeadline = block.timestamp + 2 days;
         c.status = Status.ReportSubmitted;
+        c.extensionsUsed = 0;
+        c.maxExtensions = 1;
+        c.minVotes = requiredVotes;
 
         emit ReportSubmitted(id, cid);
     }
@@ -206,38 +221,65 @@ contract FundraisingBank {
     function voteOnReport(uint id, bool approve, string calldata commentCID) external onlyValidator {
         Campaign storage c = campaigns[id];
         require(c.status == Status.ReportSubmitted, "No report submitted");
-        require(!c.daoVotes[msg.sender], "Already voted");
+        require(!daoVotes[id][msg.sender], "Already voted");
 
-        c.daoVotes[msg.sender] = true;
-        c.voteComments[msg.sender] = commentCID;
-        c.totalVotes++;
+        daoVotes[id][msg.sender] = true;
+        voteComments[id][msg.sender] = commentCID;
+        unchecked { c.totalVotes++; }
         validators[msg.sender].lastVoted = block.timestamp;
 
         if (approve) {
-            c.votesFor++;
+            unchecked { c.votesFor++; }
         } else {
-            c.votesAgainst++;
+            unchecked { c.votesAgainst++; }
         }
 
         emit DaoVoted(id, msg.sender, approve, commentCID);
 
-        if (c.votesFor >= requiredVotes) {
-            c.status = Status.Verified;
-            emit CampaignStatusChanged(id, Status.Verified);
+        if (c.totalVotes >= c.minVotes) {
+            finalizeVote(id);
         }
     }
 
-    function finalizeVote(uint id) external {
+    function requestAppeal(uint id) external onlyCreator(id) {
         Campaign storage c = campaigns[id];
-        require(c.status == Status.ReportSubmitted || c.status == Status.VoteExpired, "Not votable");
+        require(c.status == Status.Rejected || c.status == Status.VoteExpired, "Cannot appeal");
+        require(!appealRequested[id], "Appeal already requested");
+
+        c.status = Status.ReportSubmitted;
+        c.voteDeadline = block.timestamp + 2 days;
+        c.votesFor = 0;
+        c.votesAgainst = 0;
+        c.totalVotes = 0;
+        c.voteFinalized = false;
+        c.extensionsUsed = 0;
+        c.maxExtensions = 1;
+        c.minVotes = requiredVotes;
+
+        appealRequested[id] = true;
+        emit AppealRequested(id);
+    }
+
+    function finalizeVote(uint id) public {
+        Campaign storage c = campaigns[id];
+        require(c.status == Status.ReportSubmitted, "Not in voting");
         require(!c.voteFinalized, "Already finalized");
         c.voteFinalized = true;
 
         bool passed = c.votesFor >= c.votesAgainst;
 
+        if (passed) {
+            c.status = Status.Verified;
+            successfulReports[c.creator]++;
+            emit CampaignStatusChanged(id, Status.Verified);
+        } else {
+            c.status = Status.Rejected;
+            emit CampaignStatusChanged(id, Status.Rejected);
+        }
+
         for (uint i = 0; i < c.donors.length; i++) {
             address voter = c.donors[i];
-            if (c.daoVotes[voter]) {
+            if (daoVotes[id][voter] && validators[voter].active) {
                 if (passed) {
                     if (validators[voter].reputation < maxReputation) {
                         validators[voter].reputation++;
@@ -290,6 +332,10 @@ contract FundraisingBank {
     }
 
     function getVoteComment(uint campaignId, address voter) external view returns (string memory) {
-        return campaigns[campaignId].voteComments[voter];
+        return voteComments[campaignId][voter];
+    }
+
+    function getUserStats(address user) external view returns (uint total, uint successful) {
+        return (totalCampaigns[user], successfulReports[user]);
     }
 }
