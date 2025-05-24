@@ -16,7 +16,7 @@ function App() {
             <div className="hero-titles">
               <h1 className="hero-title">Crypto<br /><span className="jarity-accent">JARity</span></h1>
               <div className="hero-subtitle">With Crypto for Charity</div>
-              <a href="#donate" className="hero-donate-btn">DONATE</a>
+              <a href="jars" className="hero-donate-btn">DONATE</a>
             </div>
             <img
               className="hero-planet"
@@ -39,7 +39,7 @@ function App() {
                 <li>Track donations and goal progress</li>
               </ul>
             </div>
-            <a href="#donate" className="section-donate-btn">DONATE</a>
+            <a href="jars" className="section-donate-btn">DONATE</a>
           </section>
 
           {/* Featured Funds */}
@@ -51,7 +51,7 @@ function App() {
                 Find causes, create projects, and be part of the change.
               </p>
             </div>
-            <a href="#donate" className="section-donate-btn">DONATE</a>
+            <a href="jars" className="section-donate-btn">DONATE</a>
           </section>
         </div>
       </main>

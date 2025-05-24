@@ -4,6 +4,7 @@ import { ethers } from 'ethers';
 import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
 import { ProfileTabs } from "../components/ProfileTabs";
+import { BrowserProvider } from "ethers";
 
 export const RegisterPage = () => {
   const [showProfileTabs, setShowProfileTabs] = useState(false);
@@ -96,6 +97,19 @@ export const RegisterPage = () => {
     setLoading(false);
   };
 
+  // useEffect(() => {
+  //   const checkConnectedWallet = async () => {
+  //     if (typeof window.ethereum !== "undefined") {
+  //       const provider = new ethers.BrowserProvider(window.ethereum);
+  //       const accounts = await provider.listAccounts();
+  //       if (accounts.length > 0) {
+  //         setAddress(accounts[0].address); // или accounts[0] если адрес строка
+  //       }
+  //     }
+  //   };
+  //   checkConnectedWallet();
+  // }, []);
+
   return (
     <div className="register-page">
       <Header onProfileClick={() => setShowProfileTabs(s => !s) } />
@@ -107,9 +121,18 @@ export const RegisterPage = () => {
           <span className="crypto">Crypto</span>{" "}
           <span className="jarity">JARity</span>
         </h1>
-        <button className="connect-button" onClick={loginWithMetaMask} disabled={loading}>
-          {loading ? "Processing..." : "Connect MetaMask wallet"}
-        </button>
+        {address ? (
+          <div style={{ fontSize: 18, marginTop: 24 }}>
+            ✅ Connected:{" "}
+            <span style={{ fontWeight: 600, color: "#41b9e4" }}>
+              {address.slice(0, 6)}...{address.slice(-4)}
+            </span>
+          </div>
+        ) : (
+          <button className="connect-button" onClick={loginWithMetaMask} disabled={loading}>
+            {loading ? "Processing..." : "Connect MetaMask wallet"}
+          </button>
+        )}
         {response && (
           <div
             style={{

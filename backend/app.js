@@ -110,6 +110,28 @@ app.post("/upload", upload.single("image"), async (req, res) => {
   }
 })
 
+
+app.get('/banks/:id', async (req, res) => {
+  const { id } = req.params;
+  gun.get('banks').get(id).once(async (data) => {
+    if (!data || !data.cid) {
+      return res.status(404).json({ success: false, error: 'Jar not found' });
+    }
+
+    let meta = {};
+    try {
+      meta = await fetchIpfsMetadata(data.cid);
+    } catch (err) {
+    }
+
+    res.json({
+      id,
+      ...data,
+      ...meta,
+    });
+  });
+});
+
 app.post('/admin/clear-banks', (req, res) => {
   gun.get('banks').map().once((data, key) => {
     if (key) gun.get('banks').get(key).put(null);
