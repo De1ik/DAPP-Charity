@@ -60,7 +60,6 @@
 .donation-form select,
 .donation-form input,
 .donation-form textarea {
-    width: 100%;
     margin: 0.5rem 0;
     padding: 0.75rem;
     border-radius: 5px;
@@ -183,7 +182,7 @@
 .donation-form select,
 .donation-form input,
 .donation-form textarea {
-  width: 100%;
+  width: 95%;
   margin-bottom: 1rem;
   padding: 0.75rem;
   border-radius: 10px;
@@ -192,7 +191,9 @@
   color: #fff;
   font-size: 1rem;
 }
-
+.donation-form select{
+    width: 60%;
+}
 .donation-form textarea {
   resize: vertical;
   min-height: 100px;
@@ -340,4 +341,56 @@
   background: linear-gradient(135deg, #1b1f2b, #003b5e);
   color: #ffffff;
   box-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
+}
+.chart-container {
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 14px;
+    border: 2px solid #41b9e4;
+    box-shadow: 0 4px 20px rgba(0, 191, 255, 0.1);
+    margin-top: 2rem;
+    color: #ccc;
+    text-align: center;
+}
+
+.chart-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #90eaaa;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.wallet-address {
+    font-size: 0.875rem;
+    color: #e0e0e0;
+}
+
+.chart {
+    width: 100%;
+    height: 300px;
+}
+
+.labels .label-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.success-rate {
+    font-size: 0.95rem;
+    color: #e0e0e0;
+}
+
+.success-rate strong {
+    font-size: 1.25rem;
+    color: #34d399;
 }

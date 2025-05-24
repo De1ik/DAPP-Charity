@@ -5,6 +5,7 @@ import {ProfileTabs} from "../components/ProfileTabs.jsx";
 import { useState, useEffect } from "react";
 import {Footer} from "../components/Footer.jsx";
 import { useLocation } from "react-router-dom";
+import FundraiserSummaryStats from './components/FundraiserSummaryStats.jsx'
 
 const DonationJar = () => {
     const location = useLocation();
@@ -156,8 +157,17 @@ const DonationJar = () => {
                                 By selecting continue, you agree to our <a href="#">terms and conditions</a>
                             </p>
                         </div>
+                        <FundraiserSummaryStats
+                            stats={{
+                                wallet: '0x123...2038',
+                                canceled: 2,
+                                finished: 5,
+                                active: 3
+                            }}
+                        />
                     </div>
                 </div>
+
             </main>
 
 
