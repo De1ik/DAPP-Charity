@@ -1,31 +1,40 @@
 import React from "react";
-import { useLocation } from "react-router-dom"; // if you use react-router
+import { useNavigate, useLocation } from "react-router-dom";
 
-export const ProfileTabs = () => {
+export const ProfileTabs = ({ activeTab, onTabClick }) => {
+  const navigate = useNavigate();
   const location = useLocation();
+
+  // Define your jars page path!
+  const jarsPagePath = "/jars?tab=myjars";
+
+  const handleTabClick = (tab) => {
+    if (tab === "myjars" && location.pathname !== jarsPagePath) {
+      navigate(jarsPagePath);
+    }
+    onTabClick(tab);
+  };
+
   return (
     <div className="catalog-tabs">
-      <a
-        className={`catalog-tab${location.pathname === "/me" ? " catalog-tab-active" : ""}`}
-        href="/me"
-        style={{ textDecoration: "none" }}
+      <span
+        className={`catalog-tab${activeTab === "me" ? " catalog-tab-active" : ""}`}
+        onClick={() => handleTabClick("me")}
       >
         Me
-      </a>
-      <a
-        className={`catalog-tab${location.pathname === "/donations" ? " catalog-tab-active" : ""}`}
-        href="/donations"
-        style={{ textDecoration: "none" }}
+      </span>
+      <span
+        className={`catalog-tab${activeTab === "donations" ? " catalog-tab-active" : ""}`}
+        onClick={() => handleTabClick("donations")}
       >
         Donations
-      </a>
-      <a
-        className={`catalog-tab${location.pathname === "/my-jars" ? " catalog-tab-active" : ""}`}
-        href="/my-jars"
-        style={{ textDecoration: "none" }}
+      </span>
+      <span
+        className={`catalog-tab${activeTab === "myjars" ? " catalog-tab-active" : ""}`}
+        onClick={() => handleTabClick("myjars")}
       >
         My Jars
-      </a>
+      </span>
     </div>
   );
 };
