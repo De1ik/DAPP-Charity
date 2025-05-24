@@ -1,0 +1,317 @@
+.register-page {
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.register-page .div {
+  background-color: #1a1a1a;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.register-page .name {
+  height: 250px;
+  left: 457px;
+  position: absolute;
+  top: 158px;
+  width: 530px;
+}
+
+.register-page .overlap-group {
+  height: 250px;
+  position: relative;
+  width: 526px;
+}
+
+.register-page .text-wrapper {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(144, 234, 171, 1) 0%,
+    rgba(65, 185, 228, 1) 100%
+  );
+  background-clip: text;
+  color: transparent;
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 96px;
+  font-weight: 600;
+  left: 204px;
+  letter-spacing: 2.88px;
+  line-height: normal;
+  position: absolute;
+  text-fill-color: transparent;
+  top: 106px;
+}
+
+.register-page .text-wrapper-2 {
+  color: var(--variable-collection-green);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 96px;
+  font-weight: 700;
+  left: 0;
+  letter-spacing: 2.88px;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+}
+
+.register-page .connect-button {
+  height: 109px;
+  left: 298px;
+  position: absolute;
+  top: 571px;
+  width: 840px;
+}
+
+.register-page .overlap {
+  background-color: var(--variable-collection-green);
+  border-radius: 18px;
+  height: 109px;
+  position: relative;
+  width: 838px;
+}
+
+.register-page .text-wrapper-3 {
+  color: #ffffff;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 40px;
+  font-weight: 700;
+  left: 138px;
+  letter-spacing: 1.20px;
+  line-height: normal;
+  position: absolute;
+  top: 25px;
+  width: 561px;
+}
+
+.register-page .header {
+  background-color: transparent;
+  height: 82px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1440px;
+}
+
+.register-page .frame {
+  height: 82px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 221px;
+}
+
+.register-page .text-wrapper-4 {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(144, 234, 171, 1) 0%,
+    rgba(65, 185, 228, 1) 100%
+  );
+  background-clip: text;
+  color: transparent;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 36px;
+  font-weight: 700;
+  left: 75px;
+  letter-spacing: 1.08px;
+  line-height: normal;
+  position: absolute;
+  text-fill-color: transparent;
+  top: 13px;
+}
+
+.register-page .div-wrapper {
+  height: 82px;
+  left: 332px;
+  position: absolute;
+  top: 0;
+  width: 221px;
+}
+
+.register-page .text-wrapper-5 {
+  color: var(--variable-collection-text2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 74px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 26px;
+}
+
+.register-page .frame-2 {
+  height: 82px;
+  left: 563px;
+  position: absolute;
+  top: 0;
+  width: 221px;
+}
+
+.register-page .text-wrapper-6 {
+  color: var(--variable-collection-text2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 38px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 26px;
+}
+
+.register-page .frame-3 {
+  height: 82px;
+  left: 804px;
+  position: absolute;
+  top: 0;
+  width: 221px;
+}
+
+.register-page .text-wrapper-7 {
+  color: var(--variable-collection-text2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 15px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 26px;
+}
+
+.register-page .overlap-2 {
+  height: 82px;
+  left: 1025px;
+  position: absolute;
+  top: 0;
+  width: 415px;
+}
+
+.register-page .text-wrapper-8 {
+  color: var(--variable-collection-text2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 69px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 26px;
+}
+
+.register-page .frame-4 {
+  height: 82px;
+  left: 194px;
+  position: absolute;
+  top: 0;
+  width: 221px;
+}
+
+.register-page .text-wrapper-9 {
+  color: var(--variable-collection-text2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 62px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 26px;
+}
+
+.register-page .frame-5 {
+  height: 277px;
+  left: 0;
+  position: absolute;
+  top: 908px;
+  width: 1440px;
+}
+
+.register-page .p {
+  color: #ffffff;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 13px;
+  font-weight: 700;
+  left: 40px;
+  letter-spacing: 0.39px;
+  line-height: normal;
+  position: absolute;
+  top: 244px;
+}
+
+.register-page .frame-6 {
+  height: 196px;
+  left: 1049px;
+  position: absolute;
+  top: 41px;
+  width: 171px;
+}
+
+.register-page .text-wrapper-10 {
+  color: #ffffff;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 13px;
+  font-weight: 700;
+  left: 16px;
+  letter-spacing: 0.39px;
+  line-height: normal;
+  position: absolute;
+  top: 7px;
+}
+
+.register-page .text-wrapper-11 {
+  color: #ffffff;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 13px;
+  font-weight: 700;
+  left: 16px;
+  letter-spacing: 0.39px;
+  line-height: normal;
+  position: absolute;
+  top: 42px;
+}
+
+.register-page .text-wrapper-12 {
+  color: #ffffff;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 13px;
+  font-weight: 700;
+  left: 17px;
+  letter-spacing: 0.39px;
+  line-height: normal;
+  position: absolute;
+  top: 77px;
+}
+
+.register-page .frame-7 {
+  height: 196px;
+  left: 1220px;
+  position: absolute;
+  top: 41px;
+  width: 171px;
+}
+
+.register-page .chatgpt-image-may {
+  height: 209px;
+  left: 66px;
+  object-fit: cover;
+  position: absolute;
+  top: 14px;
+  width: 209px;
+}
+
+.register-page .frame-8 {
+  height: 196px;
+  left: 919px;
+  position: absolute;
+  top: 41px;
+  width: 130px;
+}

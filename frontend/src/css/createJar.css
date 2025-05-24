@@ -1,0 +1,681 @@
+.create-jar-page {
+  background-color: #00000033;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.create-jar-page .div {
+  background-color: #00000033;
+  height: 2430px;
+  overflow: hidden;
+  position: relative;
+  width: 1440px;
+}
+
+.create-jar-page .header {
+  background-color: transparent;
+  height: 82px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1440px;
+}
+
+.create-jar-page .frame {
+  height: 82px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 221px;
+}
+
+.create-jar-page .text-wrapper {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(144, 234, 171, 1) 0%,
+    rgba(65, 185, 228, 1) 100%
+  );
+  background-clip: text;
+  color: transparent;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 36px;
+  font-weight: 700;
+  left: 75px;
+  letter-spacing: 1.08px;
+  line-height: normal;
+  position: absolute;
+  text-fill-color: transparent;
+  top: 13px;
+}
+
+.create-jar-page .div-wrapper {
+  height: 82px;
+  left: 332px;
+  position: absolute;
+  top: 0;
+  width: 221px;
+}
+
+.create-jar-page .text-wrapper-2 {
+  color: var(--variable-collection-text2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 74px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 26px;
+}
+
+.create-jar-page .frame-2 {
+  height: 82px;
+  left: 563px;
+  position: absolute;
+  top: 0;
+  width: 221px;
+}
+
+.create-jar-page .text-wrapper-3 {
+  color: var(--variable-collection-text2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 38px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 26px;
+}
+
+.create-jar-page .frame-3 {
+  height: 82px;
+  left: 804px;
+  position: absolute;
+  top: 0;
+  width: 221px;
+}
+
+.create-jar-page .text-wrapper-4 {
+  color: var(--variable-collection-text2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 15px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 26px;
+}
+
+.create-jar-page .overlap-group {
+  height: 82px;
+  left: 1025px;
+  position: absolute;
+  top: 0;
+  width: 415px;
+}
+
+.create-jar-page .text-wrapper-5 {
+  color: var(--variable-collection-text2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 69px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 26px;
+}
+
+.create-jar-page .frame-4 {
+  height: 82px;
+  left: 194px;
+  position: absolute;
+  top: 0;
+  width: 221px;
+}
+
+.create-jar-page .text-wrapper-6 {
+  color: var(--variable-collection-text2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 62px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 26px;
+}
+
+.create-jar-page .overlap {
+  height: 329px;
+  left: 5px;
+  position: absolute;
+  top: 2025px;
+  width: 1440px;
+}
+
+.create-jar-page .frame-5 {
+  height: 277px;
+  left: 0;
+  position: absolute;
+  top: 52px;
+  width: 1440px;
+}
+
+.create-jar-page .p {
+  color: #ffffff;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 13px;
+  font-weight: 700;
+  left: 40px;
+  letter-spacing: 0.39px;
+  line-height: normal;
+  position: absolute;
+  top: 244px;
+}
+
+.create-jar-page .frame-6 {
+  height: 196px;
+  left: 1049px;
+  position: absolute;
+  top: 41px;
+  width: 171px;
+}
+
+.create-jar-page .text-wrapper-7 {
+  color: #ffffff;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 13px;
+  font-weight: 700;
+  left: 16px;
+  letter-spacing: 0.39px;
+  line-height: normal;
+  position: absolute;
+  top: 7px;
+}
+
+.create-jar-page .text-wrapper-8 {
+  color: #ffffff;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 13px;
+  font-weight: 700;
+  left: 16px;
+  letter-spacing: 0.39px;
+  line-height: normal;
+  position: absolute;
+  top: 42px;
+}
+
+.create-jar-page .text-wrapper-9 {
+  color: #ffffff;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 13px;
+  font-weight: 700;
+  left: 17px;
+  letter-spacing: 0.39px;
+  line-height: normal;
+  position: absolute;
+  top: 77px;
+}
+
+.create-jar-page .frame-7 {
+  height: 196px;
+  left: 1220px;
+  position: absolute;
+  top: 41px;
+  width: 171px;
+}
+
+.create-jar-page .chatgpt-image-may {
+  height: 209px;
+  left: 66px;
+  object-fit: cover;
+  position: absolute;
+  top: 14px;
+  width: 209px;
+}
+
+.create-jar-page .frame-8 {
+  height: 196px;
+  left: 919px;
+  position: absolute;
+  top: 41px;
+  width: 130px;
+}
+
+.create-jar-page .donate-button {
+  height: 59px;
+  left: 626px;
+  position: absolute;
+  top: 0;
+  width: 177px;
+}
+
+.create-jar-page .text-wrapper-10 {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(144, 234, 171, 1) 0%,
+    rgba(65, 185, 228, 1) 100%
+  );
+  background-clip: text;
+  color: transparent;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 96px;
+  font-weight: 700;
+  left: 244px;
+  letter-spacing: 2.88px;
+  line-height: normal;
+  position: absolute;
+  text-fill-color: transparent;
+  top: 195px;
+  width: 906px;
+}
+
+.create-jar-page .text-wrapper-11 {
+  color: var(--variable-collection-BLUE);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 40px;
+  font-weight: 700;
+  left: 256px;
+  letter-spacing: 1.20px;
+  line-height: normal;
+  position: absolute;
+  top: 670px;
+  width: 730px;
+}
+
+.create-jar-page .overlap-2 {
+  height: 179px;
+  left: 256px;
+  position: absolute;
+  top: 742px;
+  width: 730px;
+}
+
+.create-jar-page .text-wrapper-12 {
+  color: var(--variable-collection-BLUE);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 40px;
+  font-weight: 700;
+  left: 0;
+  letter-spacing: 1.20px;
+  line-height: normal;
+  position: absolute;
+  top: 108px;
+  width: 730px;
+}
+
+.create-jar-page .container {
+  height: 109px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 338px;
+}
+
+.create-jar-page .overlap-3 {
+  border-radius: 4px;
+  height: 56px;
+  position: relative;
+  top: 16px;
+}
+
+.create-jar-page .background {
+  background-color: var(--variable-collection-text3);
+  border-radius: 4px;
+  height: 56px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 338px;
+}
+
+.create-jar-page .button-open {
+  border-radius: 14px;
+  height: 28px;
+  left: 303px;
+  position: relative;
+  top: 14px;
+  width: 28px;
+}
+
+.create-jar-page .SVG {
+  height: 24px;
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 24px;
+}
+
+.create-jar-page .label {
+  height: 23px;
+  left: 14px;
+  position: absolute;
+  top: 16px;
+  width: 110px;
+}
+
+.create-jar-page .text-wrapper-13 {
+  color: #d1d1d1;
+  font-family: "Nunito Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 23px;
+  position: absolute;
+  top: -1px;
+  white-space: nowrap;
+}
+
+.create-jar-page .text-wrapper-14 {
+  color: var(--variable-collection-BLUE);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 40px;
+  font-weight: 700;
+  left: 256px;
+  letter-spacing: 1.20px;
+  line-height: normal;
+  position: absolute;
+  top: 1132px;
+  width: 580px;
+}
+
+.create-jar-page .text-wrapper-15 {
+  color: var(--variable-collection-BLUE);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 40px;
+  font-weight: 700;
+  left: 256px;
+  letter-spacing: 1.20px;
+  line-height: normal;
+  position: absolute;
+  top: 1405px;
+  width: 649px;
+}
+
+.create-jar-page .text-wrapper-16 {
+  color: var(--variable-collection-BLUE);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 40px;
+  font-weight: 700;
+  left: 256px;
+  letter-spacing: 1.20px;
+  line-height: normal;
+  position: absolute;
+  top: 1708px;
+  width: 351px;
+}
+
+.create-jar-page .overlap-4 {
+  height: 159px;
+  left: 256px;
+  position: absolute;
+  top: 415px;
+  width: 922px;
+}
+
+.create-jar-page .text-wrapper-17 {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(144, 234, 171, 1) 0%,
+    rgba(65, 185, 228, 1) 100%
+  );
+  background-clip: text;
+  color: transparent;
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 40px;
+  font-weight: 700;
+  left: 0;
+  letter-spacing: 1.20px;
+  line-height: normal;
+  position: absolute;
+  text-fill-color: transparent;
+  top: 0;
+  width: 922px;
+}
+
+.create-jar-page .input-wrapper {
+  background-color: var(--variable-collection-text3);
+  border-radius: 4px;
+  height: 56px;
+  left: 3px;
+  position: absolute;
+  top: 88px;
+  width: 696px;
+}
+
+.create-jar-page .input {
+  border-radius: 4px;
+  height: 56px;
+  left: 10px;
+  overflow: hidden;
+  position: relative;
+  width: 236px;
+}
+
+.create-jar-page .label-2 {
+  background: none;
+  border: none;
+  color: #d1d1d1;
+  font-family: "Nunito Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  height: 31px;
+  left: 5px;
+  letter-spacing: 0;
+  line-height: 23px;
+  overflow: hidden;
+  padding: 0;
+  padding-left: 0;
+  position: relative;
+  top: 17px;
+  width: 214px;
+}
+
+.create-jar-page .background-2 {
+  background-color: var(--variable-collection-text3);
+  border-radius: 4px;
+  height: 56px;
+  left: 256px;
+  position: absolute;
+  top: 1810px;
+  width: 696px;
+}
+
+.create-jar-page .label-3 {
+  height: 31px;
+  left: 5px;
+  overflow: hidden;
+  position: relative;
+  top: 17px;
+  width: 214px;
+}
+
+.create-jar-page .text-wrapper-18 {
+  color: #d1d1d1;
+  font-family: "Nunito Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 23px;
+  position: absolute;
+  top: -1px;
+  width: 258px;
+}
+
+.create-jar-page .background-3 {
+  background-color: var(--variable-collection-text3);
+  border-radius: 4px;
+  height: 56px;
+  left: 256px;
+  position: absolute;
+  top: 965px;
+  width: 696px;
+}
+
+.create-jar-page .label-wrapper {
+  border-radius: 4px;
+  height: 56px;
+  left: 49px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 236px;
+}
+
+.create-jar-page .bx-calendar {
+  height: 40px;
+  left: 3px;
+  position: absolute;
+  top: 8px;
+  width: 40px;
+}
+
+.create-jar-page .background-4 {
+  background-color: var(--variable-collection-text3);
+  border-radius: 4px;
+  height: 56px;
+  left: 256px;
+  position: absolute;
+  top: 1034px;
+  width: 696px;
+}
+
+.create-jar-page .input-2 {
+  border-radius: 4px;
+  height: 56px;
+  left: 50px;
+  overflow: hidden;
+  position: absolute;
+  top: -4px;
+  width: 236px;
+}
+
+.create-jar-page .vector {
+  height: 26px;
+  left: 15px;
+  position: absolute;
+  top: 11px;
+  width: 16px;
+}
+
+.create-jar-page .fieldset-wrapper {
+  background-color: var(--variable-collection-text3);
+  border-radius: 4px;
+  height: 125px;
+  left: 256px;
+  position: absolute;
+  top: 1238px;
+  width: 696px;
+}
+
+.create-jar-page .fieldset {
+  border-radius: 20px;
+  height: 130px;
+  overflow: hidden;
+  position: relative;
+  top: -5px;
+  width: 591px;
+}
+
+.create-jar-page .explain-why-you-re-wrapper {
+  height: 69px;
+  left: 9px;
+  position: relative;
+  top: 11px;
+  width: 575px;
+}
+
+.create-jar-page .explain-why-you-re {
+  color: #d1d1d1;
+  font-family: "Nunito Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 23px;
+  position: absolute;
+  top: -1px;
+  width: 557px;
+}
+
+.create-jar-page .overlap-5 {
+  height: 181px;
+  left: 256px;
+  position: absolute;
+  top: 1485px;
+  width: 696px;
+}
+
+.create-jar-page .background-5 {
+  background-color: var(--variable-collection-text3);
+  border-radius: 4px;
+  height: 125px;
+  left: 0;
+  position: absolute;
+  top: 56px;
+  width: 696px;
+}
+
+.create-jar-page .fieldset-2 {
+  border-radius: 20px;
+  height: 130px;
+  overflow: hidden;
+  position: relative;
+  top: -13px;
+  width: 591px;
+}
+
+.create-jar-page .text-wrapper-19 {
+  color: #d1d1d1;
+  font-family: "Nunito Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 296px;
+  letter-spacing: 0;
+  line-height: 23px;
+  position: absolute;
+  top: 94px;
+  width: 557px;
+}
+
+.create-jar-page .material-symbols {
+  height: 54px;
+  left: 309px;
+  position: absolute;
+  top: 38px;
+  width: 54px;
+}
+
+.create-jar-page .label-4 {
+  height: 69px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 575px;
+}
+
+.create-jar-page .text-wrapper-20 {
+  color: #d1d1d1;
+  font-family: "Nunito Sans-Regular", Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 23px;
+  position: absolute;
+  top: -1px;
+  width: 557px;
+}

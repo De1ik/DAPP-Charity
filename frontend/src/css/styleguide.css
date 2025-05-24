@@ -1,16 +1,4 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   --variable-collection-add1: rgba(250, 163, 26, 1);
   --variable-collection-add2: rgba(228, 65, 157, 1);
   --variable-collection-background: rgba(26, 26, 26, 1);
@@ -21,5 +9,4 @@
   --variable-collection-text: rgba(249, 248, 248, 1);
   --variable-collection-text2: rgba(97, 97, 97, 1);
   --variable-collection-text3: rgba(46, 46, 46, 1);
-
 }

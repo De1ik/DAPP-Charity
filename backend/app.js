@@ -208,3 +208,73 @@ server.listen(PORT, async () => {
     console.error('❌ IPFS init failed:', err)
   }
 })
+
+app.post("/user/banks", (req, res) => {
+  const { address } = req.body
+  const banks = []
+
+  gun.get('users')
+     .get(address.toLowerCase())
+     .get('banks')
+     .map()
+     .once((data) => {
+        if (data) banks.push(data)
+     })
+
+  setTimeout(() => res.json(banks), 500)
+})
+
+app.post("/user/upload-bank", upload.single("image"), async (req, res) => {
+  try {
+    const { address, name, description, goal, ended_at } = req.body
+    const imageBuffer = req.file.buffer
+
+    if (!address) {
+      return res.status(400).json({ success: false, error: "Missing address" })
+    }
+
+    // 🖼️ Upload image to IPFS
+    const imageFile = new File([imageBuffer], req.file.originalname, {
+      type: req.file.mimetype
+    })
+
+    const imageCid = await client.uploadFile(imageFile)
+
+    // 📝 Create metadata
+    const metadata = {
+      name,
+      description,
+      goal: parseFloat(goal),
+      ended_at,
+      image: `ipfs://${imageCid}`,
+      createdAt: new Date().toISOString()
+    }
+
+    // 📦 Upload metadata to IPFS
+    const jsonBlob = new Blob([JSON.stringify(metadata)], { type: 'application/json' })
+    const jsonFile = new File([jsonBlob], 'bank-metadata.json')
+    const jsonCid = await client.uploadFile(jsonFile)
+
+    const bankEntry = {
+      cid: jsonCid.toString(),
+      imageCid: imageCid.toString(),
+      metadataUrl: `https://ipfs.io/ipfs/${jsonCid}`,
+      createdAt: new Date().toISOString()
+    }
+
+    // 🔗 Save to Gun under user's address
+    gun.get('users')
+       .get(address.toLowerCase())
+       .get('banks')
+       .set(bankEntry)
+
+    return res.json({
+      success: true,
+      ...bankEntry
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ success: false, error: 'Upload failed' })
+  }
+})
+

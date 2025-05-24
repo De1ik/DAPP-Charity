@@ -6,6 +6,7 @@ import AdminPanel from "./AdminPanel.jsx"
 import './index.css'
 import UploadDocument from './UploadDocument.jsx'
 import App from './App.jsx'
+import { RegisterPage } from './RegisterPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/upload/:address" element={<UploadDocument />} />
         <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

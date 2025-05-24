@@ -1,0 +1,92 @@
+.desktop {
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.desktop .div-12 {
+  background-color: var(--variable-collection-background);
+  height: 3364px;
+  position: relative;
+  width: 1440px;
+}
+
+.desktop .overlap-7 {
+  height: 2047px;
+  left: 0;
+  position: absolute;
+  top: 1040px;
+  width: 1440px;
+}
+
+.desktop .div-13 {
+  background: linear-gradient(
+    180deg,
+    rgba(26, 26, 26, 1) 2%,
+    rgba(26, 26, 26, 1) 13%,
+    rgba(26, 26, 26, 1) 88%
+  );
+  background-color: var(--variable-collection-background);
+  height: 1024px;
+  left: 0;
+  position: absolute;
+  top: 2px;
+  width: 1440px;
+}
+
+.desktop .overlap-8 {
+  background-color: var(--variable-collection-background);
+  height: 1040px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1440px;
+}
+
+.desktop .chatgpt-image-may-2 {
+  height: 500px;
+  left: 146px;
+  object-fit: cover;
+  position: absolute;
+  top: 524px;
+  width: 500px;
+}
+
+.desktop .text-wrapper-18 {
+  color: var(--variable-collection-text3);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 32px;
+  font-weight: 700;
+  left: 1025px;
+  letter-spacing: 0.96px;
+  line-height: normal;
+  position: absolute;
+  text-shadow: 0px 0px 4.7px #90eaab;
+  top: 519px;
+}
+
+.desktop .frame-11 {
+  background-color: var(--variable-collection-text3);
+  border-radius: 18px;
+  box-shadow: 0px 0px 4.9px 3px #90eaab;
+  height: 57px;
+  left: 1165px;
+  overflow: hidden;
+  position: absolute;
+  top: 949px;
+  width: 249px;
+}
+
+.desktop .text-wrapper-19 {
+  color: var(--variable-collection-green);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 73px;
+  letter-spacing: 0.72px;
+  line-height: normal;
+  position: absolute;
+  top: 10px;
+}
