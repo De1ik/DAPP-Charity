@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import express from 'express'
+import axios from 'axios'
 import Gun from 'gun'
 import http from 'http'
 import cors from 'cors'
@@ -97,7 +98,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
       success: true,
       metadataCID: jsonCid.toString(),
       metadataUrl: `https://ipfs.io/ipfs/${jsonCid}`,
-      imageCID: imageCid.toString(),
+      imageCID: imageCid ? imageCid.toString() : null,
       imageUrl: `https://ipfs.io/ipfs/${imageCid}`
     })
   } catch (err) {
@@ -106,13 +107,35 @@ app.post("/upload", upload.single("image"), async (req, res) => {
   }
 })
 
-app.get("/banks", (req, res) => {
-  const banks = []
+app.post('/admin/clear-banks', (req, res) => {
   gun.get('banks').map().once((data, key) => {
-    if (data) banks.push({ id: key, cid: data.cid })
-  })
-  setTimeout(() => res.json(banks), 500)
-})
+    if (key) gun.get('banks').get(key).put(null);
+  });
+  res.json({success: true, message: "All banks deleted."});
+});
+
+
+app.get("/banks", async (req, res) => {
+  const banks = [];
+
+  gun.get('banks').map().once((data, key) => {
+    if (data && data.cid) banks.push({ id: key, cid: data.cid, owner: data.owner });
+  });
+
+  setTimeout(async () => {
+    const enriched = await Promise.all(
+      banks.map(async bank => {
+        try {
+          const resp = await axios.get(`https://ipfs.io/ipfs/${bank.cid}`);
+          return { ...bank, ...resp.data };
+        } catch (err) {
+          return { ...bank, error: 'Failed to fetch metadata from IPFS' };
+        }
+      })
+    );
+    res.json(enriched);
+  }, 500);
+});
 
 app.post("/auth/verify", (req, res) => {
     const {address, message, signature } = req.body;

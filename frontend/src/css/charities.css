@@ -61,20 +61,17 @@ body {
   border-radius: 18px;
   border: 2px solid #41b9e4;
   box-shadow: 0 4px 28px #2be9ff0e;
-  max-width: 600px;
-}
-
-.м h2 {
-  color: #41b9e4;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.form-section p {
-  color: #ccc;
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  height: 420px;
+  min-height: 420px;
+  position: relative;
+  overflow: visible;
+  transition: box-shadow 0.2s;
+  text-align: center;
 }
 
 .donation-form select,
@@ -87,6 +84,12 @@ body {
   border: 1px solid #41b9e4;
   background: #1a1a1a;
   color: #fff;
+  margin-bottom: 16px;
+  align-self: center;
+  text-align: center;
+}
+
+.charity-description {
   font-size: 1rem;
 }
 
@@ -129,7 +132,13 @@ body {
   font-size: 1.8rem;
   font-weight: bold;
   color: #fff;
-  margin-bottom: 1rem;
+  border: none;
+  border-radius: 9px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background 0.15s;
+  align-self: center;
+  margin-top: auto;
 }
 
 .donation-summary .amount span {
