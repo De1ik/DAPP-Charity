@@ -59,6 +59,9 @@ export const CharitiesJarsPage = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
+  const navigateToDonate = (jarId) => {
+    navigate(`/jarDescription?jarId=${jarId}`);
+  };
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tab = params.get("tab");
@@ -117,7 +120,7 @@ export const CharitiesJarsPage = () => {
             <div style={{ color: "#fff", gridColumn: "span 3", textAlign: "center" }}>Loading...</div>
           ) : (
             jarsToShow.map((charity, i) => (
-              <CharityCard key={i} {...charity} />
+                <CharityCard key={i} {...charity} onDonate={() => navigateToDonate(charity.id || charity.title)} />
             ))
           )}
         </div>

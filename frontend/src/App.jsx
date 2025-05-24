@@ -1,10 +1,4 @@
-import { useState } from 'react'
-import { ethers } from 'ethers'
-import { useNavigate } from 'react-router-dom'
-import './App.css'
-
-import React from "react";
-import "./css/index.css";
+import "./css/main.css";
 
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
