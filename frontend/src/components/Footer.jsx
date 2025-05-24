@@ -19,7 +19,7 @@ export const Footer = () => (
       <img
         className="footer-logo"
         alt="Planet logo"
-        src="images/planet.png"
+        src="/images/planet.png"
       />
     </div>
     <div className="copyright">
