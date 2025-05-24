@@ -8,14 +8,14 @@ import "../css/charities.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import { useWallet } from "../context/Wallet";
 
-const CATEGORY_IMAGE_MAP = {
+export const CATEGORY_IMAGE_MAP = {
   Health: "/images/jar-red.png",
   Animals: "/images/jar-blue.png",
   Environment: "/images/jar-green.png"
 };
-const DEFAULT_IMAGE = "/images/jar-blue.png";
+export const DEFAULT_IMAGE = "/images/jar-blue.png";
 
-const STATUS_ENUM_NAMES = [
+export const STATUS_ENUM_NAMES = [
   "Active",
   "Cancelled",
   "Completed",
@@ -139,7 +139,7 @@ useEffect(() => {
               title={charity.name}
               description={charity.description}
               status={charity.status}
-              onDonate={() => navigateToDonate(charity.id || charity.name)}
+              onDonate={() => navigateToDonate(charity.id)}
             />
             ))
           )}

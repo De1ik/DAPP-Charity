@@ -1,4 +1,4 @@
-const statusMap = {
+export const statusMap = {
   Active:            { text: "Active",            color: "#41b9e4",   textColor: "#fff" },
   Cancelled:         { text: "Cancelled",         color: "#ff3737",   textColor: "#fff" },
   Completed:         { text: "Completed",         color: "#00e164",   textColor: "#fff" },
