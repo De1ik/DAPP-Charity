@@ -1,0 +1,135 @@
+.charities-catalog .div-4 {
+  background-color: #1a1a1a;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.charities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 48px 40px; /* row gap, column gap */
+  justify-items: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding-top: 20px; /* Adjust for your header/title */
+  padding-bottom: 40px;
+  width: 100%;
+}
+
+.catalog-view-more-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.charities-catalog .text-wrapper-25.catalog-header {
+  font-size: 96px;
+  font-weight: 700;
+  background: radial-gradient(50% 50% at 50% 50%, #90eaaa 0%, #41b9e4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  margin: 80px 0 0 0;
+  letter-spacing: 2.88px;
+}
+
+.charities-catalog .donate-button-10 {
+  height: 59px;
+  left: 641px;
+  position: absolute;
+  top: 1806px;
+  width: 177px;
+}
+
+.charities-catalog {
+  background-color: #1a1a1a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+
+.charity-card {
+  background: #222;
+  border-radius: 18px;
+  border: 2px solid #41b9e4;
+  padding: 32px 24px 24px 24px;
+  box-shadow: 0 4px 28px #2be9ff0e;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 360px;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+
+.charity-card:hover {
+  box-shadow: 0 6px 40px #41b9e4aa;
+}
+
+.charity-image {
+  width: 88px;
+  height: 88px;
+  margin-bottom: 24px;
+  align-self: center;
+}
+
+.charity-title {
+  font-size: 1.28rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.charity-description {
+  font-size: 1rem;
+  color: #bdbdbd;
+  margin-bottom: 24px;
+}
+
+.charity-donate-button {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.charity-donate-button[style*="red"] {
+  background: #ff1c1c;
+}
+
+.catalog-view-more {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #222;
+  background: #1db4ff;
+  padding: 12px 36px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.catalog-view-more:hover {
+  background: #90eaaa;
+}
+
+@media (max-width: 1000px) {
+  .charities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .charities-grid {
+    grid-template-columns: 1fr;
+  }
+}

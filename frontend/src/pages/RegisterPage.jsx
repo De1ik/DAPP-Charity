@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import chatgptImageMay232025015531PmRemovebgPreview1 from "../images/ChatGPT_Image_May_23__2025__01_55_31_PM-removebg-preview 1.png";
 import "../css/register.css";
 import { ethers } from 'ethers';
+import { Header } from "../components/Header"
+import { Footer } from "../components/Footer"
 
 export const RegisterPage = () => {
   const [address, setAddress] = useState(null);
@@ -95,16 +96,7 @@ export const RegisterPage = () => {
 
   return (
     <div className="register-page">
-      <header className="header">
-        <div className="logo">Our</div>
-        <nav className="nav">
-          <a href="/">HOME</a>
-          <a href="/">JARS</a>
-          <a href="/">CREATE JAR</a>
-          <a href="/">ABOUT</a>
-          <a href="/">PROFILE</a>
-        </nav>
-      </header>
+      <Header />
 
       <main className="main-content">
         <h1>
@@ -148,30 +140,7 @@ export const RegisterPage = () => {
         )}
       </main>
 
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-sections">
-            <div>
-              <div className="footer-title">FOR DONORS</div>
-              <div>Donate crypto</div>
-              <div>Explore causes</div>
-            </div>
-            <div>
-              <div className="footer-title">RESOURCES</div>
-              <div>About us</div>
-              <div>Terms of use</div>
-            </div>
-          </div>
-          <img
-            className="footer-logo"
-            alt="Chatgpt logo"
-            src={chatgptImageMay232025015531PmRemovebgPreview1}
-          />
-        </div>
-        <div className="copyright">
-          Copyright © 2025, All rights reserved.
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
