@@ -102,10 +102,10 @@
   box-shadow: 0 4px 28px #2be9ff0e;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  width: 320px;       /* Or whatever size fits your grid! */
-  height: 420px;      /* Make all cards the same height */
-  min-height: 420px;  /* Optional: ensures all cards stay at least this tall */
+  align-items: center;      /* <--- center everything */
+  width: 320px;
+  height: 420px;
+  min-height: 420px;
   position: relative;
   overflow: visible;
   transition: box-shadow 0.2s;

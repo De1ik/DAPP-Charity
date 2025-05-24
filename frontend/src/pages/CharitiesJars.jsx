@@ -6,48 +6,36 @@ import { Footer } from "../components/Footer";
 import { useState, useEffect } from "react";
 import "../css/charities.css"
 import { useLocation, useNavigate } from "react-router-dom";
+import { useWallet } from "../context/Wallet";
 
-// Replace with the real user address after login
-const USER_ADDRESS = "0x123...abc".toLowerCase(); // For demo, or get from wallet/session
+const CATEGORY_IMAGE_MAP = {
+  Health: "/images/jar-red.png",
+  Animals: "/images/jar-blue.png",
+  Environment: "/images/jar-green.png"
+};
+const DEFAULT_IMAGE = "/images/jar-blue.png";
 
-const USER_NAME = "John Doe"; // fallback for static
-
-const charities = [
-  {
-    title: "Paws for Hope",
-    image: "/images/jar-blue.png",
-    description: "...",
-    buttonColor: "#1DB4FF",
-    status: "waiting_approval",
-    owner: "John Doe"
-  },
-  {
-    title: "Wildlife Haven Alliance",
-    image: "/images/jar-blue.png",
-    description: "...",
-    buttonColor: "#1DB4FF",
-    status: "waiting",
-    owner: "Jane Smith"
-  },
-  {
-    title: "Farm Friend Foundation",
-    image: "/images/jar-blue.png",
-    description: "...",
-    buttonColor: "#1DB4FF",
-    status: "canceled",
-    owner: "John Doe"
-  },
-  {
-    title: "Healing Hands Network",
-    image: "/images/jar-red.png",
-    description: "...",
-    buttonColor: "#FF1C1C",
-    status: "finished",
-    owner: "Alice Johnson"
-  }
+const STATUS_ENUM_NAMES = [
+  "Active",
+  "Cancelled",
+  "Completed",
+  "Expired",
+  "FinalizedEarly",
+  "AwaitingDecision",
+  "Confirmed",
+  "Rejected",
+  "FundsTransferred",
+  "ReportSubmitted",
+  "Verified",
+  "VoteExpired"
 ];
 
-
+function convertStatus(status) {
+  if (typeof status === "number" && status >= 0 && status < STATUS_ENUM_NAMES.length) {
+    return STATUS_ENUM_NAMES[status];
+  }
+  return "Active";
+}
 
 export const CharitiesJarsPage = () => {
   const [loading, setLoading] = useState(true);
@@ -56,12 +44,14 @@ export const CharitiesJarsPage = () => {
   const [activeTab, setActiveTab] = useState("myjars");
   const [showOnlyMine, setShowOnlyMine] = useState(false);
 
+  const { wallet } = useWallet();
   const location = useLocation()
   const navigate = useNavigate()
 
   const navigateToDonate = (jarId) => {
     navigate(`/jarDescription?jarId=${jarId}`);
   };
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tab = params.get("tab");
@@ -74,35 +64,46 @@ export const CharitiesJarsPage = () => {
     }
   }, [location.search]);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("http://localhost:8080/banks")
-      .then(res => res.json())
-      .then(data => {
-        setJars(Array.isArray(data) ? data : []);
-        setLoading(false);
-      })
-      .catch(() => {
-        setJars([]);
-        setLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  setLoading(true);
+  fetch("http://localhost:8080/banks")
+    .then(res => res.json())
+    .then(data => {
+      const normalized = Array.isArray(data)
+        ? data.map(jar => {
+            const status = convertStatus(jar.status);
+            let image = jar.image;
+            if (!image || image === "ipfs://null") {
+              image = CATEGORY_IMAGE_MAP[jar.category] || DEFAULT_IMAGE;
+            } else if (image.startsWith("ipfs://")) {
+              image = image.replace("ipfs://", "https://ipfs.io/ipfs/");
+            }
+            return {
+              ...jar,
+              status,
+              image
+            };
+          })
+        : [];
+      setJars(normalized);
+      setLoading(false);
+    })
+    .catch(() => {
+      setJars([]);
+      setLoading(false);
+    });
+}, []);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     setShowOnlyMine(tab === "myjars");
   };
 
-  let jarsToShow = jars.length === 0 ? charities : jars;
-
-  if (showOnlyMine) {
-    if (jars.length === 0) {
-      jarsToShow = charities.filter(jar => jar.owner === USER_NAME);
-    } else {
-      jarsToShow = jars.filter(jar =>
-        (jar.owner && jar.owner.toLowerCase() === USER_ADDRESS)
-      );
-    }
+  let jarsToShow = jars;
+  if (showOnlyMine && wallet) {
+    jarsToShow = jars.filter(jar =>
+      jar.owner && jar.owner.toLowerCase() === wallet.toLowerCase()
+    );
   }
 
   return (
@@ -118,12 +119,32 @@ export const CharitiesJarsPage = () => {
         <div className="charities-grid">
           {loading ? (
             <div style={{ color: "#fff", gridColumn: "span 3", textAlign: "center" }}>Loading...</div>
+          ) : jarsToShow.length === 0 ? (
+            <div style={{
+              color: "#fff",
+              gridColumn: "span 3",
+              textAlign: "center",
+              padding: "2rem 0",
+              opacity: 0.7
+            }}>
+              {showOnlyMine
+                ? "You haven't created any fundraisers yet."
+                : "No fundraisers found."}
+            </div>
           ) : (
             jarsToShow.map((charity, i) => (
-                <CharityCard key={i} {...charity} onDonate={() => navigateToDonate(charity.id || charity.title)} />
+              <CharityCard
+              key={i}
+              image={charity.image}
+              title={charity.name}
+              description={charity.description}
+              status={charity.status}
+              onDonate={() => navigateToDonate(charity.id || charity.name)}
+            />
             ))
           )}
         </div>
+
         <div className="catalog-view-more-wrapper">
           <button className="catalog-view-more">View more</button>
         </div>
