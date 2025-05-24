@@ -1,681 +1,162 @@
+:root {
+  --blue-main: #41b9e4;
+  --green-main: #90eaab;
+  --input-bg: #1a222c;
+  --input-border: #90eaab;
+  --input-focus: #41b9e4;
+  --font-main: "Poppins", "Helvetica", Arial, sans-serif;
+  --font-secondary: "Nunito Sans", Arial, sans-serif;
+}
+
 .create-jar-page {
-  background-color: #00000033;
+  min-height: 100vh;
+  width: 100vw;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: conic-gradient(
+    rgba(0,0,0,0.20) 5%,
+    var(--green-main) 30%,
+    rgba(0,0,0,0.20) 45%,
+    rgba(0,0,0,0.20) 55%,
+    var(--green-main) 63%,
+    rgba(0,0,0,0.20) 95%
+  );
+  padding-bottom: 48px;
+}
+
+.create-jar-form {
+  background: rgba(0,0,0,0.18);
+  border-radius: 2.5rem;
+  max-width: 540px;
+  width: 90vw;
+  margin: 3rem 0 2rem 0;
+  padding: 2.5rem 2.2rem 2.5rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  box-shadow: 0 8px 48px 0 rgba(65,185,228,0.15);
+}
+
+.page-title {
+  font-family: var(--font-main);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.8rem 0;
+  text-align: center;
+  background: radial-gradient(ellipse at center, var(--green-main) 0%, var(--blue-main) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.form-label {
+  font-family: var(--font-main);
+  font-size: 1.15rem;
+  color: var(--blue-main);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.02em;
+}
+
+.form-input,
+textarea.form-input,
+select.form-input {
   width: 100%;
-}
-
-.create-jar-page .div {
-  background-color: #00000033;
-  height: 2430px;
-  overflow: hidden;
-  position: relative;
-  width: 1440px;
-}
-
-.create-jar-page .header {
-  background-color: transparent;
-  height: 82px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 1440px;
-}
-
-.create-jar-page .frame {
-  height: 82px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 221px;
-}
-
-.create-jar-page .text-wrapper {
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent;
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(144, 234, 171, 1) 0%,
-    rgba(65, 185, 228, 1) 100%
-  );
-  background-clip: text;
-  color: transparent;
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 36px;
-  font-weight: 700;
-  left: 75px;
-  letter-spacing: 1.08px;
-  line-height: normal;
-  position: absolute;
-  text-fill-color: transparent;
-  top: 13px;
-}
-
-.create-jar-page .div-wrapper {
-  height: 82px;
-  left: 332px;
-  position: absolute;
-  top: 0;
-  width: 221px;
-}
-
-.create-jar-page .text-wrapper-2 {
-  color: var(--variable-collection-text2);
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 24px;
-  font-weight: 700;
-  left: 74px;
-  letter-spacing: 0.72px;
-  line-height: normal;
-  position: absolute;
-  top: 26px;
-}
-
-.create-jar-page .frame-2 {
-  height: 82px;
-  left: 563px;
-  position: absolute;
-  top: 0;
-  width: 221px;
-}
-
-.create-jar-page .text-wrapper-3 {
-  color: var(--variable-collection-text2);
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 24px;
-  font-weight: 700;
-  left: 38px;
-  letter-spacing: 0.72px;
-  line-height: normal;
-  position: absolute;
-  top: 26px;
-}
-
-.create-jar-page .frame-3 {
-  height: 82px;
-  left: 804px;
-  position: absolute;
-  top: 0;
-  width: 221px;
-}
-
-.create-jar-page .text-wrapper-4 {
-  color: var(--variable-collection-text2);
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 24px;
-  font-weight: 700;
-  left: 15px;
-  letter-spacing: 0.72px;
-  line-height: normal;
-  position: absolute;
-  top: 26px;
-}
-
-.create-jar-page .overlap-group {
-  height: 82px;
-  left: 1025px;
-  position: absolute;
-  top: 0;
-  width: 415px;
-}
-
-.create-jar-page .text-wrapper-5 {
-  color: var(--variable-collection-text2);
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 24px;
-  font-weight: 700;
-  left: 69px;
-  letter-spacing: 0.72px;
-  line-height: normal;
-  position: absolute;
-  top: 26px;
-}
-
-.create-jar-page .frame-4 {
-  height: 82px;
-  left: 194px;
-  position: absolute;
-  top: 0;
-  width: 221px;
-}
-
-.create-jar-page .text-wrapper-6 {
-  color: var(--variable-collection-text2);
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 24px;
-  font-weight: 700;
-  left: 62px;
-  letter-spacing: 0.72px;
-  line-height: normal;
-  position: absolute;
-  top: 26px;
-}
-
-.create-jar-page .overlap {
-  height: 329px;
-  left: 5px;
-  position: absolute;
-  top: 2025px;
-  width: 1440px;
-}
-
-.create-jar-page .frame-5 {
-  height: 277px;
-  left: 0;
-  position: absolute;
-  top: 52px;
-  width: 1440px;
-}
-
-.create-jar-page .p {
-  color: #ffffff;
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 13px;
-  font-weight: 700;
-  left: 40px;
-  letter-spacing: 0.39px;
-  line-height: normal;
-  position: absolute;
-  top: 244px;
-}
-
-.create-jar-page .frame-6 {
-  height: 196px;
-  left: 1049px;
-  position: absolute;
-  top: 41px;
-  width: 171px;
-}
-
-.create-jar-page .text-wrapper-7 {
-  color: #ffffff;
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 13px;
-  font-weight: 700;
-  left: 16px;
-  letter-spacing: 0.39px;
-  line-height: normal;
-  position: absolute;
-  top: 7px;
-}
-
-.create-jar-page .text-wrapper-8 {
-  color: #ffffff;
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 13px;
-  font-weight: 700;
-  left: 16px;
-  letter-spacing: 0.39px;
-  line-height: normal;
-  position: absolute;
-  top: 42px;
-}
-
-.create-jar-page .text-wrapper-9 {
-  color: #ffffff;
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 13px;
-  font-weight: 700;
-  left: 17px;
-  letter-spacing: 0.39px;
-  line-height: normal;
-  position: absolute;
-  top: 77px;
-}
-
-.create-jar-page .frame-7 {
-  height: 196px;
-  left: 1220px;
-  position: absolute;
-  top: 41px;
-  width: 171px;
-}
-
-.create-jar-page .chatgpt-image-may {
-  height: 209px;
-  left: 66px;
-  object-fit: cover;
-  position: absolute;
-  top: 14px;
-  width: 209px;
-}
-
-.create-jar-page .frame-8 {
-  height: 196px;
-  left: 919px;
-  position: absolute;
-  top: 41px;
-  width: 130px;
-}
-
-.create-jar-page .donate-button {
-  height: 59px;
-  left: 626px;
-  position: absolute;
-  top: 0;
-  width: 177px;
-}
-
-.create-jar-page .text-wrapper-10 {
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent;
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(144, 234, 171, 1) 0%,
-    rgba(65, 185, 228, 1) 100%
-  );
-  background-clip: text;
-  color: transparent;
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 96px;
-  font-weight: 700;
-  left: 244px;
-  letter-spacing: 2.88px;
-  line-height: normal;
-  position: absolute;
-  text-fill-color: transparent;
-  top: 195px;
-  width: 906px;
-}
-
-.create-jar-page .text-wrapper-11 {
-  color: var(--variable-collection-BLUE);
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 40px;
-  font-weight: 700;
-  left: 256px;
-  letter-spacing: 1.20px;
-  line-height: normal;
-  position: absolute;
-  top: 670px;
-  width: 730px;
-}
-
-.create-jar-page .overlap-2 {
-  height: 179px;
-  left: 256px;
-  position: absolute;
-  top: 742px;
-  width: 730px;
-}
-
-.create-jar-page .text-wrapper-12 {
-  color: var(--variable-collection-BLUE);
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 40px;
-  font-weight: 700;
-  left: 0;
-  letter-spacing: 1.20px;
-  line-height: normal;
-  position: absolute;
-  top: 108px;
-  width: 730px;
-}
-
-.create-jar-page .container {
-  height: 109px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 338px;
-}
-
-.create-jar-page .overlap-3 {
-  border-radius: 4px;
-  height: 56px;
-  position: relative;
-  top: 16px;
-}
-
-.create-jar-page .background {
-  background-color: var(--variable-collection-text3);
-  border-radius: 4px;
-  height: 56px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 338px;
-}
-
-.create-jar-page .button-open {
-  border-radius: 14px;
-  height: 28px;
-  left: 303px;
-  position: relative;
-  top: 14px;
-  width: 28px;
-}
-
-.create-jar-page .SVG {
-  height: 24px;
-  left: 2px;
-  position: absolute;
-  top: 2px;
-  width: 24px;
-}
-
-.create-jar-page .label {
-  height: 23px;
-  left: 14px;
-  position: absolute;
-  top: 16px;
-  width: 110px;
-}
-
-.create-jar-page .text-wrapper-13 {
+  background: var(--input-bg);
+  border: 2px solid var(--input-border);
   color: #d1d1d1;
-  font-family: "Nunito Sans-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  left: 0;
-  letter-spacing: 0;
-  line-height: 23px;
-  position: absolute;
-  top: -1px;
-  white-space: nowrap;
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  border-radius: 0.8rem;
+  padding: 0.85rem 1rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.1rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  resize: vertical;
 }
 
-.create-jar-page .text-wrapper-14 {
-  color: var(--variable-collection-BLUE);
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 40px;
-  font-weight: 700;
-  left: 256px;
-  letter-spacing: 1.20px;
-  line-height: normal;
-  position: absolute;
-  top: 1132px;
-  width: 580px;
+.form-input:focus,
+textarea.form-input:focus,
+select.form-input:focus {
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 2px var(--blue-main)22;
 }
 
-.create-jar-page .text-wrapper-15 {
-  color: var(--variable-collection-BLUE);
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 40px;
-  font-weight: 700;
-  left: 256px;
-  letter-spacing: 1.20px;
-  line-height: normal;
-  position: absolute;
-  top: 1405px;
-  width: 649px;
+textarea.form-input {
+  min-height: 120px;
+  max-height: 300px;
 }
 
-.create-jar-page .text-wrapper-16 {
-  color: var(--variable-collection-BLUE);
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 40px;
-  font-weight: 700;
-  left: 256px;
-  letter-spacing: 1.20px;
-  line-height: normal;
-  position: absolute;
-  top: 1708px;
-  width: 351px;
+.form-helper {
+  color: #d1d1d1;
+  font-family: var(--font-secondary);
+  font-size: 0.98rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.3rem;
+  display: block;
+  opacity: 0.85;
 }
 
-.create-jar-page .overlap-4 {
-  height: 159px;
-  left: 256px;
-  position: absolute;
-  top: 415px;
-  width: 922px;
-}
-
-.create-jar-page .text-wrapper-17 {
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent;
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(144, 234, 171, 1) 0%,
-    rgba(65, 185, 228, 1) 100%
-  );
-  background-clip: text;
-  color: transparent;
-  font-family: "Poppins-Bold", Helvetica;
-  font-size: 40px;
-  font-weight: 700;
-  left: 0;
-  letter-spacing: 1.20px;
-  line-height: normal;
-  position: absolute;
-  text-fill-color: transparent;
-  top: 0;
-  width: 922px;
-}
-
-.create-jar-page .input-wrapper {
-  background-color: var(--variable-collection-text3);
-  border-radius: 4px;
-  height: 56px;
-  left: 3px;
-  position: absolute;
-  top: 88px;
-  width: 696px;
-}
-
-.create-jar-page .input {
-  border-radius: 4px;
-  height: 56px;
-  left: 10px;
-  overflow: hidden;
-  position: relative;
-  width: 236px;
-}
-
-.create-jar-page .label-2 {
-  background: none;
+.submit-btn {
+  margin-top: 1.2rem;
+  padding: 1rem 0;
+  width: 100%;
   border: none;
+  border-radius: 1.1rem;
+  background: linear-gradient(90deg, var(--green-main) 10%, var(--blue-main) 90%);
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #161616;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 16px 0 rgba(65,185,228,0.10);
+  transition: background 0.25s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.submit-btn:hover,
+.submit-btn:focus {
+  background: linear-gradient(90deg, var(--blue-main) 10%, var(--green-main) 90%);
+  color: #000;
+  box-shadow: 0 4px 24px 0 rgba(65,185,228,0.22);
+}
+
+/* File input styling */
+input[type="file"].form-input {
+  padding: 0.5rem 0;
+  border: none;
+  background: none;
   color: #d1d1d1;
-  font-family: "Nunito Sans-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  height: 31px;
-  left: 5px;
-  letter-spacing: 0;
-  line-height: 23px;
-  overflow: hidden;
-  padding: 0;
-  padding-left: 0;
-  position: relative;
-  top: 17px;
-  width: 214px;
 }
 
-.create-jar-page .background-2 {
-  background-color: var(--variable-collection-text3);
-  border-radius: 4px;
-  height: 56px;
-  left: 256px;
-  position: absolute;
-  top: 1810px;
-  width: 696px;
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  .create-jar-form {
+    max-width: 98vw;
+    padding: 1.5rem 1rem 1.7rem 1rem;
+    border-radius: 1.2rem;
+  }
+  .page-title {
+    font-size: 2rem;
+  }
 }
 
-.create-jar-page .label-3 {
-  height: 31px;
-  left: 5px;
-  overflow: hidden;
-  position: relative;
-  top: 17px;
-  width: 214px;
+@media (max-width: 500px) {
+  .create-jar-form {
+    padding: 1rem 0.3rem 1.3rem 0.3rem;
+  }
+  .page-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+  }
+  .form-label {
+    font-size: 0.98rem;
+  }
 }
 
-.create-jar-page .text-wrapper-18 {
-  color: #d1d1d1;
-  font-family: "Nunito Sans-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  left: 0;
-  letter-spacing: 0;
-  line-height: 23px;
-  position: absolute;
-  top: -1px;
-  width: 258px;
-}
-
-.create-jar-page .background-3 {
-  background-color: var(--variable-collection-text3);
-  border-radius: 4px;
-  height: 56px;
-  left: 256px;
-  position: absolute;
-  top: 965px;
-  width: 696px;
-}
-
-.create-jar-page .label-wrapper {
-  border-radius: 4px;
-  height: 56px;
-  left: 49px;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  width: 236px;
-}
-
-.create-jar-page .bx-calendar {
-  height: 40px;
-  left: 3px;
-  position: absolute;
-  top: 8px;
-  width: 40px;
-}
-
-.create-jar-page .background-4 {
-  background-color: var(--variable-collection-text3);
-  border-radius: 4px;
-  height: 56px;
-  left: 256px;
-  position: absolute;
-  top: 1034px;
-  width: 696px;
-}
-
-.create-jar-page .input-2 {
-  border-radius: 4px;
-  height: 56px;
-  left: 50px;
-  overflow: hidden;
-  position: absolute;
-  top: -4px;
-  width: 236px;
-}
-
-.create-jar-page .vector {
-  height: 26px;
-  left: 15px;
-  position: absolute;
-  top: 11px;
-  width: 16px;
-}
-
-.create-jar-page .fieldset-wrapper {
-  background-color: var(--variable-collection-text3);
-  border-radius: 4px;
-  height: 125px;
-  left: 256px;
-  position: absolute;
-  top: 1238px;
-  width: 696px;
-}
-
-.create-jar-page .fieldset {
-  border-radius: 20px;
-  height: 130px;
-  overflow: hidden;
-  position: relative;
-  top: -5px;
-  width: 591px;
-}
-
-.create-jar-page .explain-why-you-re-wrapper {
-  height: 69px;
-  left: 9px;
-  position: relative;
-  top: 11px;
-  width: 575px;
-}
-
-.create-jar-page .explain-why-you-re {
-  color: #d1d1d1;
-  font-family: "Nunito Sans-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  left: 0;
-  letter-spacing: 0;
-  line-height: 23px;
-  position: absolute;
-  top: -1px;
-  width: 557px;
-}
-
-.create-jar-page .overlap-5 {
-  height: 181px;
-  left: 256px;
-  position: absolute;
-  top: 1485px;
-  width: 696px;
-}
-
-.create-jar-page .background-5 {
-  background-color: var(--variable-collection-text3);
-  border-radius: 4px;
-  height: 125px;
-  left: 0;
-  position: absolute;
-  top: 56px;
-  width: 696px;
-}
-
-.create-jar-page .fieldset-2 {
-  border-radius: 20px;
-  height: 130px;
-  overflow: hidden;
-  position: relative;
-  top: -13px;
-  width: 591px;
-}
-
-.create-jar-page .text-wrapper-19 {
-  color: #d1d1d1;
-  font-family: "Nunito Sans-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  left: 296px;
-  letter-spacing: 0;
-  line-height: 23px;
-  position: absolute;
-  top: 94px;
-  width: 557px;
-}
-
-.create-jar-page .material-symbols {
-  height: 54px;
-  left: 309px;
-  position: absolute;
-  top: 38px;
-  width: 54px;
-}
-
-.create-jar-page .label-4 {
-  height: 69px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 575px;
-}
-
-.create-jar-page .text-wrapper-20 {
-  color: #d1d1d1;
-  font-family: "Nunito Sans-Regular", Helvetica;
-  font-size: 24px;
-  font-weight: 400;
-  left: 0;
-  letter-spacing: 0;
-  line-height: 23px;
-  position: absolute;
-  top: -1px;
-  width: 557px;
-}
