@@ -3,73 +3,68 @@ import { ethers } from 'ethers'
 import { useNavigate } from 'react-router-dom'
 import './App.css'
 
+import React from "react";
+import "./css/index.css";
+
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+
+
 function App() {
-  const [address, setAddress] = useState(null)
-  const [response, setResponse] = useState(null)
-  const navigate = useNavigate()
-
-  const checkNft = async (userAddress) => {
-    const res = await fetch('http://localhost:8080/auth/check-nft', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ address: userAddress })
-    })
-    return await res.json()
-  }
-
-  const loginWithMetaMask = async () => {
-    try {
-      if (!window.ethereum) {
-        alert('MetaMask not detected')
-        return
-      }
-
-      const provider = new ethers.BrowserProvider(window.ethereum)
-      const signer = await provider.getSigner()
-      const userAddress = await signer.getAddress()
-
-      const message = `Login attempt at ${new Date().toISOString()}`
-      const signature = await signer.signMessage(message)
-
-      const res = await fetch('http://localhost:8080/auth/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ address: userAddress, message, signature })
-      })
-
-      const verifyResult = await res.json()
-      setAddress(userAddress)
-
-      if (verifyResult.success) {
-        const nftResult = await checkNft(userAddress)
-
-        if (nftResult.access) {
-          setResponse({ verified: true, hasAccessNFT: true, message: '✅ Access granted.' })
-        } else {
-          navigate(`/upload/${userAddress}`) // ➜ переходимо на сторінку завантаження документа
-        }
-      } else {
-        setResponse({ verified: false, message: verifyResult.message })
-      }
-    } catch (err) {
-      console.error(err)
-      setResponse({ error: err.message })
-    }
-  }
-
   return (
-    <div className="App">
-      <h1>MetaMask Login</h1>
-      <button onClick={loginWithMetaMask}>Login with MetaMask</button>
+    <>
+      <Header />
+      <main className="desktop-main">
+        {/* Hero Section */}
+        <section className="hero-section">
+          <div className="hero-background" />
+          <div className="hero-inner">
+            <div className="hero-titles">
+              <h1 className="hero-title">Crypto<br /><span className="jarity-accent">JARity</span></h1>
+              <div className="hero-subtitle">With Crypto for Charity</div>
+              <a href="#donate" className="hero-donate-btn">DONATE</a>
+            </div>
+            <img
+              className="hero-planet"
+              alt="Planet"
+              src="/images/planet.png"
+            />
+          </div>
+        </section>
 
-      {address && <p><strong>Address:</strong> {address}</p>}
-      {response && (
-        <pre style={{ textAlign: 'left', background: '#eee', padding: '1rem' }}>
-          {JSON.stringify(response, null, 2)}
-        </pre>
-      )}
-    </div>
-  )
+        {/* How it Works */}
+        <div className="main-block">
+          <section className="how-section">
+            <h2 className="section-title">How it works</h2>
+            <div className="how-box">
+              <ul className="how-list">
+                <li>Create a fundraiser</li>
+                <li>Share your cause and spread the word</li>
+                <li>Accept donations in crypto</li>
+                <li>Withdraw funds directly</li>
+                <li>Track donations and goal progress</li>
+              </ul>
+            </div>
+            <a href="#donate" className="section-donate-btn">DONATE</a>
+          </section>
+
+          {/* Featured Funds */}
+          <section className="featured-section">
+            <h2 className="section-title">Featured Funds</h2>
+            <div className="featured-box">
+              <p>
+                Explore meaningful fundraisers created by people like you, or supporting nonprofits.<br/>
+                Find causes, create projects, and be part of the change.
+              </p>
+            </div>
+            <a href="#donate" className="section-donate-btn">DONATE</a>
+          </section>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
 }
 
 export default App
+

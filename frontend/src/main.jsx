@@ -4,8 +4,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AdminPanel from "./pages/AdminPanel.jsx"
 
 import './index.css'
-import UploadDocument from './UploadDocument.jsx'
-// import CreateJarPage from './pages/CreateJar.jsx'
 import { CreateJarPage } from './pages/CreateJar.jsx'
 
 
