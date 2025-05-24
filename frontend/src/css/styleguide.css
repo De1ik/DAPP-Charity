@@ -1,0 +1,12 @@
+:root {
+  --variable-collection-add1: rgba(250, 163, 26, 1);
+  --variable-collection-add2: rgba(228, 65, 157, 1);
+  --variable-collection-background: rgba(26, 26, 26, 1);
+  --variable-collection-blue: rgba(65, 185, 228, 0.2);
+  --variable-collection-BLUE: rgba(65, 185, 228, 1);
+  --variable-collection-coloralisa: rgba(209, 209, 209, 1);
+  --variable-collection-green: rgba(144, 234, 171, 1);
+  --variable-collection-text: rgba(249, 248, 248, 1);
+  --variable-collection-text2: rgba(97, 97, 97, 1);
+  --variable-collection-text3: rgba(46, 46, 46, 1);
+}

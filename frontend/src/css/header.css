@@ -1,0 +1,69 @@
+.header {
+  width: 100%;
+  padding: 2rem 2rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav a{
+  color: #f9f8f8;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+
+.nav button {
+  color: #f9f8f8;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+
+.nav button:hover {
+  color: #90eaaa;
+}
+
+.nav a:hover {
+  color: #90eaaa;
+}
+
+@media (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
+
+.profile-tabs-overlay {
+  position: fixed;
+  top: 0;
+  left: 0; right: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.catalog-tabs {
+  background: #232323;
+  margin-top: 36px;
+  border-radius: 16px;
+  box-shadow: 0 4px 32px #0002;
+  display: flex;
+  gap: 48px;
+  padding: 16px 40px;
+  min-width: 520px;
+  position: relative;
+}
