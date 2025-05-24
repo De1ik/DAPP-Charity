@@ -4,6 +4,20 @@ import { Header } from "../components/Header.jsx";
 import { ProfileTabs } from "../components/ProfileTabs.jsx";
 import { Footer } from "../components/Footer.jsx";
 import { useLocation } from "react-router-dom";
+import FundraiserSummaryStats from './components/FundraiserSummaryStats.jsx';
+import { CATEGORY_IMAGE_MAP } from "./CharitiesJars.jsx";
+import { DEFAULT_IMAGE } from "./CharitiesJars.jsx";
+import { statusMap } from "../components/charity/CharityCard.jsx";
+
+function getJarImage(jar) {
+  if (!jar.image || jar.image === "ipfs://null") {
+    return CATEGORY_IMAGE_MAP[jar.category] || DEFAULT_IMAGE;
+  }
+  if (jar.image.startsWith("ipfs://")) {
+    return jar.image.replace("ipfs://", "https://ipfs.io/ipfs/");
+  }
+  return jar.image;
+}
 
 import usdtAbi from "../abi/MockUSDT.json";
 import bankAbi from "../abi/FundraisingBank.json";
@@ -17,38 +31,22 @@ const DonationJar = () => {
 
   const [showProfileTabs, setShowProfileTabs] = useState(false);
   const [activeTab, setActiveTab] = useState("jarDescription");
+
+  const [showOnlyMine, setShowOnlyMine] = useState(false);
   const [activeInfoTab, setActiveInfoTab] = useState("description");
-  const [jarData, setJarData] = useState(null);
+  const [jar, setJar] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const USDT_ADDRESS = "0xBDf506f7182e54D0564930e4Ea9E2ed5e564b989";
-  const FUNDRAISING_BANK_ADDRESS = "0xc3FaC5B2BFCdDa849e0140bbe93a1CDac6DC8b9e";
-
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
-
   useEffect(() => {
-    const tab = new URLSearchParams(location.search).get("tab");
-    if (tab === "jarDescription") {
-      setActiveTab("jarDescription");
-    } else {
-      setActiveTab("all");
-    }
-  }, [location.search]);
-
-  useEffect(() => {
-    if (!jarId) return;
     setLoading(true);
-
     fetch(`http://localhost:8080/banks/${jarId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setJarData(data);
+      .then(res => res.json())
+      .then(data => {
+        setJar(data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error("Error loading jar:", err);
+      .catch(() => {
+        setJar(null);
         setLoading(false);
       });
   }, [jarId]);
@@ -111,6 +109,60 @@ const handleDonate = async () => {
     }
     };
 
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+    setShowOnlyMine(tab === "jarDescription");
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get("tab");
+    if (tab === "jarDescription") {
+      setActiveTab("jarDescription");
+      setShowOnlyMine(true);
+    } else {
+      setShowOnlyMine(false);
+      setActiveTab("all");
+    }
+  }, [location.search]);
+
+  if (loading) {
+    return (
+      <>
+        <Header onProfileClick={() => setShowProfileTabs(s => !s)} />
+        <div className="donation-container">
+          <main className="donation-content">
+            <div style={{ color: "#fff", textAlign: "center", width: "100%" }}>Loading...</div>
+          </main>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
+  if (!jar) {
+    return (
+      <>
+        <Header onProfileClick={() => setShowProfileTabs(s => !s)} />
+        <div className="donation-container">
+          <main className="donation-content">
+            <div style={{ color: "#fff", textAlign: "center", width: "100%" }}>
+              Fundraiser not found.
+            </div>
+          </main>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
+  const badge = statusMap[jar.status] || null;
+  const jarImage = getJarImage(jar);
+
+  const progress = jar.goal && jar.raised
+    ? Math.round((jar.raised / jar.goal) * 100)
+    : 0;
+  const progressText = `${progress}%\n${jar.raised || 0}/${jar.goal || 0} SC`;
 
   return (
     <>
@@ -125,13 +177,38 @@ const handleDonate = async () => {
       <div className="donation-container">
         <main className="donation-content">
           <div className="jar-section">
-            <img src={image} alt="Donation Jar" className="jar-image" />
-
+            {badge && (
+              <div
+                className="charity-status-badge"
+                style={{
+                  background: badge.color,
+                  color: badge.textColor,
+                  marginBottom: 16,
+                  alignSelf: "center"
+                }}
+              >
+                {badge.text}
+              </div>
+            )}
+            <img
+              src={jarImage}
+              alt="Donation Jar"
+              className="jar-image"
+            />
             <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
+              <div
+                className="progress-fill"
+                style={{ width: jar.goal ? `${progress}%` : "0%" }}
+              ></div>
             </div>
             <div className="progress-text">
-              {progressPercent}%<br />{raised}/{goal} SC
+              {jar.goal ? (
+                <>
+                  {progress}%<br />{jar.raised || 0}/{jar.goal} SC
+                </>
+              ) : (
+                <span>No goal set</span>
+              )}
             </div>
 
             <div className="jar-description-tabs">
@@ -159,28 +236,40 @@ const handleDonate = async () => {
               <div className="jar-description-content">
                 {activeInfoTab === "description" && (
                   <>
-                    <h3>{title}</h3>
-                    <p>{description || "No description provided."}</p>
+                    <h3>{jar.name}</h3>
+                    <p>{jar.description || "No description provided."}</p>
                   </>
                 )}
-
                 {activeInfoTab === "media" && (
-                  <p><i>Media content coming soon (images, videos, etc.)</i></p>
+                  <>
+                    <h3>Media</h3>
+                    <p>
+                      {jar.videoUrl
+                        ? <a href={jar.videoUrl} target="_blank" rel="noopener noreferrer">View Video</a>
+                        : <i>No media content.</i>}
+                    </p>
+                  </>
                 )}
-
                 {activeInfoTab === "donors" && (
-                  <p><i>Top donors will be displayed here.</i></p>
+                  <>
+                    <h3>Top donors</h3>
+                    <p><i>Top donors will be displayed here.</i></p>
+                  </>
                 )}
               </div>
             </div>
           </div>
 
           <div className="form-section">
-            <h2>Make a difference with <br /> every digital coin.</h2>
+            <h2>
+              Make a difference with <br /> every digital coin.
+            </h2>
             <p>
               When you donate with crypto, you’re not just giving — you’re creating
               change. Your contribution supports trusted nonprofits, and you’ll
-              know exactly where your funds go.
+              know exactly where your funds go. Your crypto can make a real
+              difference.
+              <br />Transparency, purpose, and impact — all in one transaction.
             </p>
 
             <div className="donation-form">
@@ -205,19 +294,30 @@ const handleDonate = async () => {
               <div className="info-box">
                 <h4>Stay Incognito or Share Your Info?</h4>
                 <p>
-                  You can stay incognito — or share your name, email, and address with the nonprofit.
+                  You have the option to stay incognito — or to share your name, email,
+                  and address with the nonprofit you’re supporting. Nonprofits often
+                  collect this information to thank you personally, send tax receipts,
+                  and share updates about how your donation makes a difference.
                 </p>
               </div>
 
               <div className="donation-summary">
                 <h5>Donation Summary</h5>
-                <p>In support of {title}</p>
+                <p>In support of our Planet</p>
                 <div className="amount">0.00000<br /><span>Approx. $0.00 USD</span></div>
-                <button className="continue-btn" onClick={handleDonate}>Continue</button>
+                <button className="continue-btn">Continue</button>
                 <p className="terms">
                   By selecting continue, you agree to our <a href="#">terms and conditions</a>
                 </p>
               </div>
+              <FundraiserSummaryStats
+                stats={{
+                  wallet: jar.owner,
+                  canceled: 2,
+                  finished: 5,
+                  active: 3
+                }}
+              />
             </div>
           </div>
         </main>

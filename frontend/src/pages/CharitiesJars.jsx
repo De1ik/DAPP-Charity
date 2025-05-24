@@ -5,49 +5,37 @@ import { ProfileTabs } from "../components/ProfileTabs";
 import { Footer } from "../components/Footer";
 import "../css/charities.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useWallet } from "../context/Wallet";
 
-const USER_ADDRESS = "0x123...abc".toLowerCase(); // Replace with actual wallet address
-const USER_NAME = "John Doe"; // Fallback name
 
-// Static fallback if API fails
-const charitiesFallback = [
-  {
-    id: "1",
-    title: "Paws for Hope",
-    image: "/images/jar-blue.png",
-    description: "Help us bring hope to those in need! Every coin you drop into this jar supports food, shelter, and care for vulnerable families. Your generosity can change a life today.",
-    buttonColor: "#1DB4FF",
-    status: "waiting_approval",
-    owner: "John Doe"
-  },
-  {
-    id: "2",
-    title: "Wildlife Haven Alliance",
-    image: "/images/jar-blue.png",
-    description: "Together, we can make a difference! All donations collected in this jar go directly to supporting children’s education, healthcare, and safe living conditions. Give a little—change a lot.",
-    buttonColor: "#1DB4FF",
-    status: "waiting",
-    owner: "Jane Smith"
-  },
-  {
-    id: "3",
-    title: "Farm Friend Foundation",
-    image: "/images/jar-blue.png",
-    description: "Your kindness matters. Contributions to this jar will help fund critical medical treatments, warm meals, and emergency aid for those facing hard times. Every donation counts!",
-    buttonColor: "#1DB4FF",
-    status: "canceled",
-    owner: "John Doe"
-  },
-  {
-    id: "4",
-    title: "Healing Hands Network",
-    image: "/images/jar-red.png",
-    description: "Small change, big impact. By supporting this charity jar, you’re helping us create brighter futures for people in need. Thank you for being a part of our mission!",
-    buttonColor: "#FF1C1C",
-    status: "finished",
-    owner: "Alice Johnson"
-  }
+export const CATEGORY_IMAGE_MAP = {
+  Health: "/images/jar-red.png",
+  Animals: "/images/jar-blue.png",
+  Environment: "/images/jar-green.png"
+};
+export const DEFAULT_IMAGE = "/images/jar-blue.png";
+
+export const STATUS_ENUM_NAMES = [
+  "Active",
+  "Cancelled",
+  "Completed",
+  "Expired",
+  "FinalizedEarly",
+  "AwaitingDecision",
+  "Confirmed",
+  "Rejected",
+  "FundsTransferred",
+  "ReportSubmitted",
+  "Verified",
+  "VoteExpired"
 ];
+
+function convertStatus(status) {
+  if (typeof status === "number" && status >= 0 && status < STATUS_ENUM_NAMES.length) {
+    return STATUS_ENUM_NAMES[status];
+  }
+  return "Active";
+}
 
 export const CharitiesJarsPage = () => {
   const [loading, setLoading] = useState(true);
@@ -56,8 +44,11 @@ export const CharitiesJarsPage = () => {
   const [activeTab, setActiveTab] = useState("myjars");
   const [showOnlyMine, setShowOnlyMine] = useState(false);
 
-  const location = useLocation();
-  const navigate = useNavigate();
+
+  const { wallet } = useWallet();
+  const location = useLocation()
+  const navigate = useNavigate()
+
 
   const navigateToDonate = (jarId) => {
     if (!jarId) return;
@@ -76,40 +67,49 @@ export const CharitiesJarsPage = () => {
     }
   }, [location.search]);
 
-  // Fetch active jars (banks) from backend
-  useEffect(() => {
-    setLoading(true);
-    fetch("http://localhost:8080/banks")
-      .then(res => res.json())
-      .then(data => {
-        const activeStatuses = ["open", "active"];
-        const filtered = Array.isArray(data)
-          ? data.filter(jar => activeStatuses.includes(jar.status))
-          : [];
-        setJars(filtered);
-        setLoading(false);
-      })
-      .catch(() => {
-        setJars([]); // fallback to static if needed
-        setLoading(false);
-      });
-  }, []);
+
+useEffect(() => {
+  setLoading(true);
+  fetch("http://localhost:8080/banks")
+    .then(res => res.json())
+    .then(data => {
+      const normalized = Array.isArray(data)
+        ? data.map(jar => {
+            const status = convertStatus(jar.status);
+            let image = jar.image;
+            if (!image || image === "ipfs://null") {
+              image = CATEGORY_IMAGE_MAP[jar.category] || DEFAULT_IMAGE;
+            } else if (image.startsWith("ipfs://")) {
+              image = image.replace("ipfs://", "https://ipfs.io/ipfs/");
+            }
+            return {
+              ...jar,
+              status,
+              image
+            };
+          })
+        : [];
+      setJars(normalized);
+      setLoading(false);
+    })
+    .catch(() => {
+      setJars([]);
+      setLoading(false);
+    });
+}, []);
+
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     setShowOnlyMine(tab === "myjars");
   };
 
-  let jarsToShow = jars.length === 0 ? charitiesFallback : jars;
 
-  if (showOnlyMine) {
-    if (jars.length === 0) {
-      jarsToShow = charitiesFallback.filter(jar => jar.owner === USER_NAME);
-    } else {
-      jarsToShow = jars.filter(jar =>
-        jar.owner && jar.owner.toLowerCase() === USER_ADDRESS
-      );
-    }
+  let jarsToShow = jars;
+  if (showOnlyMine && wallet) {
+    jarsToShow = jars.filter(jar =>
+      jar.owner && jar.owner.toLowerCase() === wallet.toLowerCase()
+    );
   }
 
   return (
@@ -124,19 +124,34 @@ export const CharitiesJarsPage = () => {
       <div className="div-4">
         <div className="charities-grid">
           {loading ? (
-            <div style={{ color: "#fff", gridColumn: "span 3", textAlign: "center" }}>
-              Loading...
+            <div style={{ color: "#fff", gridColumn: "span 3", textAlign: "center" }}>Loading...</div>
+          ) : jarsToShow.length === 0 ? (
+            <div style={{
+              color: "#fff",
+              gridColumn: "span 3",
+              textAlign: "center",
+              padding: "2rem 0",
+              opacity: 0.7
+            }}>
+              {showOnlyMine
+                ? "You haven't created any fundraisers yet."
+                : "No fundraisers found."}
             </div>
           ) : (
             jarsToShow.map((charity, i) => (
               <CharityCard
-                key={charity.id || i}
-                {...charity}
-                onDonate={() => navigateToDonate(charity.id)}
-              />
+
+              key={i}
+              image={charity.image}
+              title={charity.name}
+              description={charity.description}
+              status={charity.status}
+              onDonate={() => navigateToDonate(charity.id)}
+            />
             ))
           )}
         </div>
+
         <div className="catalog-view-more-wrapper">
           <button className="catalog-view-more">View more</button>
         </div>

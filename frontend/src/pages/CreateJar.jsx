@@ -69,36 +69,37 @@ export const CreateJarPage = () => {
     if (Object.keys(errs).length > 0) return;
 
     try {
-      // 1. Подключение к MetaMask
       if (!window.ethereum) throw new Error("MetaMask not found");
       await window.ethereum.request({ method: "eth_requestAccounts" });
-
-      if (!window.ethereum) {
-        throw new Error("MetaMask is not installed");
-      }
-
       const provider = new BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
+      const address = await signer.getAddress();
 
-      // 2. Загрузка в IPFS через backend
-      // const ipfsResponse = await fetch("https://your-backend.com/api/ipfs/upload", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({
-      //     title: form.fundraiserTitle,
-      //     description: form.fundraiserStory,
-      //     category: form.fundraiserCategory,
-      //     videoUrl: form.videoUrl,
-      //     deadline: form.fundraiserDeadline,
-      //     status: "active",
-      //     images: [] // или base64, или обрабатывай на сервере
-      //   })
-      // });
-      // const { cid } = await ipfsResponse.json();
+      const formData = new FormData();
+      formData.append("name", form.fundraiserTitle);
+      formData.append("description", form.fundraiserStory);
+      formData.append("category", form.fundraiserCategory);
+      formData.append("goal", form.neededAmount);
+      formData.append("deadline", form.fundraiserDeadline);
+      formData.append("address", address);
+      formData.append("status", 0);
+      if (form.videoUrl) formData.append("videoUrl", form.videoUrl);
 
-      // 3. Получить контракт и подписанта
+      if (form.fundraiserPhotos && form.fundraiserPhotos.length > 0) {
+        formData.append("image", form.fundraiserPhotos[0]);
+      }
+
+      const ipfsResponse = await fetch("http://localhost:8080/upload", {
+        method: "POST",
+        body: formData,
+      });
+      
+      const uploadResult = await ipfsResponse.json();
+      if (!uploadResult.success) {
+        throw new Error(uploadResult.error || "IPFS upload failed");
+      }
+
       const bankContract = new ethers.Contract(FUNDRAISING_BANK_ADDRESS, bankAbi, signer);
-
       // 4. Преобразовать сумму и дедлайн
       const decimals = 6; // USDT как правило 6 знаков после запятой
       const goalAmount = parseUnits(form.neededAmount, decimals);
