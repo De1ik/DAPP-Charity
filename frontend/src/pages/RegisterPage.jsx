@@ -3,8 +3,10 @@ import "../css/register.css";
 import { ethers } from 'ethers';
 import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
+import { ProfileTabs } from "../components/ProfileTabs";
 
 export const RegisterPage = () => {
+  const [showProfileTabs, setShowProfileTabs] = useState(false);
   const [address, setAddress] = useState(null);
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -96,7 +98,9 @@ export const RegisterPage = () => {
 
   return (
     <div className="register-page">
-      <Header />
+      <Header onProfileClick={() => setShowProfileTabs(s => !s) } />
+
+      {showProfileTabs && <ProfileTabs onClose={() => setShowProfileTabs(false)} /> }
 
       <main className="main-content">
         <h1>

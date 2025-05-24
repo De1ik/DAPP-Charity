@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/upload/:address" element={<UploadDocument />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path='/catalog' element={<CharitiesCatalogPage />} />
+        <Route path='/jars' element={<CharitiesCatalogPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

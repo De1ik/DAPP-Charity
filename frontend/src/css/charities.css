@@ -23,6 +23,27 @@
   width: 100%;
 }
 
+.catalog-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.catalog-tab {
+  font-size: 2.1rem;
+  color: #666;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.catalog-tab-active {
+  color: #41b9e4;
+  border-bottom: 4px solid #41b9e4;
+  padding-bottom: 6px;
+}
+
 .charities-catalog .text-wrapper-25.catalog-header {
   font-size: 96px;
   font-weight: 700;
@@ -53,6 +74,25 @@
   width: 100%;
 }
 
+.charity-status-badge {
+  margin-bottom: 10px;
+  align-self: flex-start;
+  padding: 4px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  /* Remove absolute/positioning */
+  position: static;
+  left: unset;
+  top: unset;
+  z-index: 1;
+}
+
 
 .charity-card {
   background: #222;
@@ -63,8 +103,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 360px;
+  width: 320px;       /* Or whatever size fits your grid! */
+  height: 420px;      /* Make all cards the same height */
+  min-height: 420px;  /* Optional: ensures all cards stay at least this tall */
   position: relative;
+  overflow: visible;
   transition: box-shadow 0.2s;
 }
 
@@ -91,6 +134,8 @@
   color: #bdbdbd;
   margin-bottom: 24px;
 }
+
+
 
 .charity-donate-button {
   font-size: 1rem;
