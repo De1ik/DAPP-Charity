@@ -3,6 +3,10 @@ import { ethers } from "ethers";
 import { useWeb3 } from "./hooks/useWeb3";
 import CreateAndDonate from "./components/CreateAndDonate";
 import CampaignList from "./components/CampaignList";
+import DonationPage from "./components/JarDescription";
+import AccountInfo from "./components/AccountInfo";
+
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
     const { account, fundraisingContract, mockUSDTContract } = useWeb3();
@@ -18,7 +22,6 @@ function App() {
 
             const donation = await fundraisingContract.donations(account);
             setMyUSDTDonations(ethers.utils.formatUnits(donation, 6));
-
         } catch (err) {
             console.error("Error fetching data:", err);
         }
@@ -28,27 +31,34 @@ function App() {
         fetchData();
     }, [fundraisingContract, mockUSDTContract, account]);
 
-
     return (
-        <div>
-            <h1>Charity DAO — USDT donations</h1>
-            {account ? (
-                <>
-                    <p>Connected as: {account}</p>
-                    <p><strong>My USDT balance:</strong> {myUSDTBalance} USDT</p>
-                    <p><strong>My USDT donation:</strong> {myUSDTDonations} USDT</p>
-                    <br/>
-                    <CampaignList />
-                    <CreateAndDonate />
+        <Router>
+            <div>
+                <nav>
+                    <Link to="/">Home</Link> |{" "}
+                    <Link to="/donate">Go to Donation Page</Link> |{" "}
+                    <Link to="/account">Account Info</Link>
+                </nav>
 
-
-                </>
-            ) : (
-                <p>Please connect your wallet</p>
-            )}
-        </div>
+                <Routes>
+                    <Route path="/" element={
+                        <>
+                            <CampaignList />
+                            <CreateAndDonate />
+                        </>
+                    } />
+                    <Route path="/donate" element={<DonationPage />} />
+                    <Route path="/account" element={
+                        <AccountInfo
+                            account={account}
+                            myUSDTBalance={myUSDTBalance}
+                            myUSDTDonations={myUSDTDonations}
+                        />
+                    } />
+                </Routes>
+            </div>
+        </Router>
     );
-
 }
 
 export default App;
