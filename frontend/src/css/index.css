@@ -1,0 +1,273 @@
+:root {
+  --background-dark: #1a1a1a;
+  --primary-green: #90eaab;
+  --primary-blue: #41b9e4;
+  --primary-bg-gradient: linear-gradient(135deg, #2a353a 0%, #21323c 80%);
+  --box-bg: rgba(32, 40, 44, 0.85);
+  --box-shadow: 0 0 20px 0 #90eaab55;
+  --font-main: "Poppins", Helvetica, Arial, sans-serif;
+}
+
+body, html {
+  background: var(--background-dark);
+  margin: 0;
+  padding: 0;
+}
+
+.desktop-main {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--background-dark);
+}
+
+
+/* Hero Section */
+.hero-section {
+  width: 100%;
+  min-height: 580px;
+  background: radial-gradient(circle at 75% 25%, #90eaab44 0, transparent 65%), 
+              linear-gradient(120deg, #222c28 40%, #41b9e4 160%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0 4rem 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px; /* Slightly overlap */
+  height: 80px; /* Adjust for stronger/softer fade */
+  pointer-events: none;
+  /* The fade: from hero-section bg to main-block bg */
+  background: linear-gradient(
+    to bottom,
+    rgba(34, 44, 40, 0) 0%, /* transparent, matches .hero-section bg */
+    var(--background-dark) 100% /* dark, matches .main-block bg */
+  );
+  z-index: 2;
+}
+
+.main-block {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: conic-gradient(
+    rgba(0,0,0,0.20) 5%,
+    var(--green-main) 65%,
+    rgba(0,0,0,0.20) 45%,
+    rgba(0,0,0,0.20) 55%,
+    var(--green-main) 63%,
+    rgba(0,0,0,0.20) 95%
+  );
+  padding-bottom: 48px;
+}
+
+.hero-background {
+  /* optional: custom gradient overlay if needed for design */
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  max-width: 1280px;
+  position: relative;
+  gap: 4vw;
+  z-index: 1;
+}
+
+.hero-titles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+  margin-right: 1vw;
+}
+
+.hero-title {
+  font-family: var(--font-main);
+  font-weight: 900;
+  font-size: 3rem;
+  color: #fff;
+  line-height: 1.1;
+  text-align: right;
+  text-shadow: 0 0 8px #90eaab66;
+}
+
+.jarity-accent {
+  color: var(--primary-blue);
+}
+
+.hero-subtitle {
+  font-family: var(--font-main);
+  font-size: 1.35rem;
+  color: #90eaab;
+  margin-top: 0.6rem;
+  text-align: right;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 6px #90eaab44;
+}
+
+.hero-donate-btn {
+  margin-top: 2.2rem;
+  padding: 0.8rem 2.6rem;
+  border-radius: 20px;
+  background: #222;
+  color: var(--primary-green);
+  font-family: var(--font-main);
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 0.07em;
+  border: 2px solid var(--primary-green);
+  box-shadow: 0 0 8px 0 #90eaab55;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  text-decoration: none;
+  text-align: center;
+}
+.hero-donate-btn:hover {
+  background: var(--primary-green);
+  color: #222;
+  border: 2px solid #41b9e4;
+}
+
+.hero-planet {
+  width: 320px;
+  height: 320px;
+  max-width: 38vw;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 30px #41b9e488);
+  margin-bottom: -2rem;
+}
+
+.section-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #41b9e4;
+  margin-top: 4.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 8px #90eaab55;
+}
+
+.how-section, .featured-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem 4rem 1rem;
+}
+
+.how-box, .featured-box {
+  background: var(--box-bg);
+  border-radius: 1.5rem;
+  box-shadow: var(--box-shadow);
+  max-width: 430px;
+  width: 100%;
+  margin-bottom: 1.8rem;
+  padding: 2rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.how-list {
+  font-family: var(--font-main);
+  color: #d8fff3;
+  font-size: 1.1rem;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.how-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1.1rem;
+}
+.how-list li:before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+  font-size: 1.12em;
+}
+
+.section-donate-btn {
+  margin-top: 0.3rem;
+  padding: 0.7rem 2.1rem;
+  border-radius: 18px;
+  background: #222;
+  color: var(--primary-green);
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 2px solid var(--primary-green);
+  box-shadow: 0 0 6px 0 #90eaab44;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.section-donate-btn:hover {
+  background: var(--primary-green);
+  color: #222;
+  border: 2px solid #41b9e4;
+}
+
+/* Featured section text */
+.featured-box p {
+  color: #d8fff3;
+  font-family: var(--font-main);
+  font-size: 1.07rem;
+  margin: 0;
+  text-align: center;
+}
+
+/* Responsive: Stack vertically and shrink elements */
+@media (max-width: 900px) {
+  .hero-inner {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0;
+  }
+  .hero-titles {
+    align-items: center;
+    text-align: center;
+    margin: 0;
+  }
+  .hero-planet {
+    margin: 0 0 1.6rem 0;
+    width: 220px;
+    height: 220px;
+    max-width: 60vw;
+  }
+  .hero-title { font-size: 2.1rem; }
+  .section-title { font-size: 1.7rem; }
+  .how-box, .featured-box { max-width: 98vw; padding: 1.2rem 0.8rem; }
+}
+
+@media (max-width: 600px) {
+  .hero-section {
+    min-height: 400px;
+    padding: 1rem 0 2.5rem 0;
+  }
+  .hero-title { font-size: 1.2rem; }
+  .hero-planet { width: 140px; height: 140px; }
+  .section-title { font-size: 1.12rem; }
+  .how-box, .featured-box { border-radius: 0.7rem; }
+}

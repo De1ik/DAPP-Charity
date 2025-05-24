@@ -81,6 +81,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
       goal: parseFloat(goal),
       ended_at,
       image: `ipfs://${imageCid}`,
+      videoUrl: videoUrl,
       createdAt: new Date().toISOString(),
       owner: address ? address.toLowerCase() : null
     }
