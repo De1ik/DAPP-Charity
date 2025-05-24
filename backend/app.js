@@ -223,4 +223,3 @@ app.post("/user/banks", (req, res) => {
   setTimeout(() => res.json(banks), 500)
 })
 
-
