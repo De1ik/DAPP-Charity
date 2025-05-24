@@ -13,6 +13,7 @@ export const CharityCard = ({
   description,
   buttonColor = "#1DB4FF",
   status,
+                                onDonate,
 }) => {
   const badge = statusMap[status];
   return (
@@ -31,6 +32,7 @@ export const CharityCard = ({
       <button
         className="charity-donate-button"
         style={{ background: buttonColor }}
+        onClick={onDonate}
       >
         Donate
       </button>
