@@ -9,6 +9,11 @@ import { CATEGORY_IMAGE_MAP } from "./CharitiesJars.jsx";
 import { DEFAULT_IMAGE } from "./CharitiesJars.jsx";
 import { statusMap } from "../components/charity/CharityCard.jsx";
 
+import usdtAbi from "../abi/MockUSDT.json";
+import bankAbi from "../abi/FundraisingBank.json";
+
+import { ethers, BrowserProvider, parseUnits } from "ethers";
+
 function getJarImage(jar) {
   if (!jar.image || jar.image === "ipfs://null") {
     return CATEGORY_IMAGE_MAP[jar.category] || DEFAULT_IMAGE;
@@ -18,11 +23,6 @@ function getJarImage(jar) {
   }
   return jar.image;
 }
-
-import usdtAbi from "../abi/MockUSDT.json";
-import bankAbi from "../abi/FundraisingBank.json";
-
-import { ethers, BrowserProvider, parseUnits } from "ethers";
 
 const DonationJar = () => {
   const location = useLocation();
@@ -50,25 +50,6 @@ const DonationJar = () => {
         setLoading(false);
       });
   }, [jarId]);
-
-  if (loading) {
-    return <div className="donation-container"><h2>Loading...</h2></div>;
-  }
-
-  if (!jarData) {
-    return <div className="donation-container"><h2>Jar not found.</h2></div>;
-  }
-
-  const {
-    title,
-    description,
-    image = "/images/jar-blue.png",
-    raised = 0,
-    goal = 1000
-  } = jarData;
-
-  const progressPercent = Math.min(100, Math.floor((raised / goal) * 100));
-
 
 const handleDonate = async () => {
     const amountStr = document.querySelector('input[placeholder="Write an amount *"]').value;
@@ -108,6 +89,7 @@ const handleDonate = async () => {
         alert("Donation failed. Check console for details.");
     }
     };
+    
     useEffect(() => {
         document.body.classList.add('donation-body');
         return () => {
@@ -125,6 +107,7 @@ const handleDonate = async () => {
             setActiveTab("all");
         }
     }, [location.search]);
+
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     setShowOnlyMine(tab === "jarDescription");
