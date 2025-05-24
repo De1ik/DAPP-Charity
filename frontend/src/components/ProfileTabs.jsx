@@ -9,7 +9,9 @@ export const ProfileTabs = ({ activeTab, onTabClick }) => {
   const jarsPagePath = "/jars?tab=myjars";
 
   const handleTabClick = (tab) => {
-    if (tab === "myjars" && location.pathname !== jarsPagePath) {
+    if (tab === "me" && location.pathname !== "/profile") {
+      navigate("/profile");
+    } else if (tab === "myjars" && location.pathname !== "/jars") {
       navigate(jarsPagePath);
     }
     onTabClick(tab);

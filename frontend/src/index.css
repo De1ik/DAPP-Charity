@@ -7,6 +7,24 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
+  --color-bg: #1a1a1a;
+  --color-bg-secondary: #808080;
+  --color-white: #fff;
+  --color-green: #90EAAB;
+  --color-blue: #41B9E4;
+  --color-text: #fff;
+  --color-gray: #616161;
+  --gradient-main: conic-gradient(
+    from 180deg at -18% 50%,
+    #1a1a1a 5%,
+    #808080 30%,
+    #1a1a1a 45%,
+    #1a1a1a 55%,
+    #808080 70%,
+    #1a1a1a 95%
+  );
+  --gradient-accent: radial-gradient(50% 50% at 50% 50%, var(--color-green) 0%, var(--color-blue) 100%);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
