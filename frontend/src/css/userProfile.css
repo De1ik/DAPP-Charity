@@ -1,0 +1,132 @@
+.user-profile {
+  min-height: 100vh;
+  background: 
+    radial-gradient(ellipse 70% 30% at 50% 60%, rgba(255,255,255,0.23) 0%, rgba(255,255,255,0.0) 60%),
+    var(--gradient-main), 
+    #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 100px;
+  padding-bottom: 40px;
+}
+
+.gradient-text {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+.profile-label {
+  font-family: "Poppins-Bold", Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+
+.profile-wallet {
+  color: var(--color-white);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  word-break: break-all;
+  margin-bottom: 36px;
+}
+
+.profile-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-stat-label {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.profile-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-green);
+}
+
+.profile-stat-value.points {
+  color: var(--color-white);
+}
+
+.profile-footer {
+  width: 100%;
+  background: transparent;
+  padding: 24px 0 12px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: relative;
+}
+
+.profile-footer .globe-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-left: 36px;
+}
+
+.profile-footer .footer-info {
+  color: var(--color-white);
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 12px;
+}
+
+@media (max-width: 900px) {
+  .profile-main-content {
+    padding-top: 70px;
+  }
+  .profile-stats {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-main-content {
+    padding: 50px 8px 32px 8px;
+  }
+  .profile-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .profile-footer .globe-img {
+    width: 70px;
+    height: 70px;
+  }
+}
