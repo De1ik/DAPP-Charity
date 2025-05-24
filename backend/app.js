@@ -109,11 +109,6 @@ app.get("/banks", (req, res) => {
   setTimeout(() => res.json(banks), 500)
 })
 
-app.get("/", (req, res) => {
-  res.send("🚀 IPFS + Gun.js Bank backend is running")
-})
-
-
 app.post("/auth/verify", (req, res) => {
     const {address, message, signature } = req.body;
 
@@ -184,28 +179,27 @@ app.get("/admin/verification-requests", isAdmin, (req, res) => {
   setTimeout(() => res.json(list), 500)
 })
 
-app.post('/admin/mint-nft', isAdmin, async (req, res) => {
-  const { address, id } = req.body
+app.post('/auth/mint-nft', async (req, res) => {
+  const { address } = req.body;
+  if (!address) return res.status(400).json({ success: false, error: "Missing address" });
   try {
-    const tx = await nftContract.mint(address)
-    await tx.wait()
-
-    gun.get('verification_requests').get(id).put({ status: "approved" })
-
-    res.json({ success: true, txHash: tx.hash })
+    const tx = await nftContract.mint(address);
+    await tx.wait();
+    res.json({ success: true, txHash: tx.hash });
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ success: false, error: 'Minting failed' })
+    console.error(err);
+    res.status(500).json({ success: false, error: 'NFT mint failed' });
   }
-})
+});
+
 
 
 server.listen(PORT, async () => {
   try {
     await initializeConnectionIpfs()
-    console.log(`🚀 Server running at http://localhost:${PORT}`)
+    console.log(`Server running at http://localhost:${PORT}`)
   } catch (err) {
-    console.error('❌ IPFS init failed:', err)
+    console.error('IPFS init failed:', err)
   }
 })
 
@@ -233,14 +227,12 @@ app.post("/user/upload-bank", upload.single("image"), async (req, res) => {
       return res.status(400).json({ success: false, error: "Missing address" })
     }
 
-    // 🖼️ Upload image to IPFS
     const imageFile = new File([imageBuffer], req.file.originalname, {
       type: req.file.mimetype
     })
 
     const imageCid = await client.uploadFile(imageFile)
 
-    // 📝 Create metadata
     const metadata = {
       name,
       description,
@@ -250,7 +242,6 @@ app.post("/user/upload-bank", upload.single("image"), async (req, res) => {
       createdAt: new Date().toISOString()
     }
 
-    // 📦 Upload metadata to IPFS
     const jsonBlob = new Blob([JSON.stringify(metadata)], { type: 'application/json' })
     const jsonFile = new File([jsonBlob], 'bank-metadata.json')
     const jsonCid = await client.uploadFile(jsonFile)
@@ -262,7 +253,6 @@ app.post("/user/upload-bank", upload.single("image"), async (req, res) => {
       createdAt: new Date().toISOString()
     }
 
-    // 🔗 Save to Gun under user's address
     gun.get('users')
        .get(address.toLowerCase())
        .get('banks')

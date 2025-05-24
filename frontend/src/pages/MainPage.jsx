@@ -2,7 +2,7 @@ import React from "react";
 import { Frame } from "./Frame";
 import { FrameWrapper } from "./FrameWrapper";
 import { Header } from "./Header";
-import { Name } from "./Name";
+import { Name } from "../components/Name";
 import { OverlapWrapper } from "./OverlapWrapper";
 import chatgptImageMay232025015531PmRemovebgPreview12 from "./chatgpt-image-may-23-2025-01-55-31-PM-removebg-preview-1-2.png";
 import "./style.css";
