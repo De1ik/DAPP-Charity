@@ -90,6 +90,7 @@ export const CreateJarPage = () => {
       //     category: form.fundraiserCategory,
       //     videoUrl: form.videoUrl,
       //     deadline: form.fundraiserDeadline,
+      //     status: "active",
       //     images: [] // или base64, или обрабатывай на сервере
       //   })
       // });
@@ -180,9 +181,8 @@ export const CreateJarPage = () => {
           >
             <option value="">Please select</option>
             <option value="health">Health</option>
-            <option value="education">Education</option>
-            <option value="emergency">Emergency</option>
-            <option value="community">Community</option>
+            <option value="animals">Animals</option>
+            <option value="environment">Environment</option>
           </select>
           {errors.fundraiserCategory && (
             <span className="form-helper" style={{ color: "red" }}>
