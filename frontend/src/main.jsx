@@ -7,7 +7,7 @@ import './index.css'
 import UploadDocument from './pages/UploadDocument.jsx'
 import App from './App.jsx'
 import { RegisterPage } from './pages/RegisterPage.jsx'
-import { CharitiesCatalogPage } from './pages/CharitiesCatalog.jsx'
+import { CharitiesJarsPage } from './pages/CharitiesJars.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/upload/:address" element={<UploadDocument />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path='/jars' element={<CharitiesCatalogPage />} />
+        <Route path='/jars' element={<CharitiesJarsPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

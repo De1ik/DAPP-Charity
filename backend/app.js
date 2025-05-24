@@ -65,20 +65,24 @@ app.use(express.json())
 
 app.post("/upload", upload.single("image"), async (req, res) => {
   try {
-    const { name, description, goal, ended_at } = req.body
-    const imageBuffer = req.file.buffer
-    const imageFile = new File([imageBuffer], req.file.originalname, {
-      type: req.file.mimetype
-    })
+    const { name, description, goal, ended_at, address, videoUrl } = req.body;
+    let imageCid = null, imageUrl = null;
 
-    const imageCid = await client.uploadFile(imageFile)
+    if (req.file) {
+      const imageFile = new File([req.file.buffer], req.file.originalname, {
+        type: req.file.mimetype
+      });
+      imageCid = await client.uploadFile(imageFile);
+      imageUrl = `ipfs://${imageCid}`;
+    }
     const metadata = {
       name,
       description,
       goal: parseFloat(goal),
       ended_at,
       image: `ipfs://${imageCid}`,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      owner: address ? address.toLowerCase() : null
     }
 
     const jsonBlob = new Blob([JSON.stringify(metadata)], { type: 'application/json' })
@@ -86,7 +90,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
     const jsonCid = await client.uploadFile(jsonFile)
 
     const id = Date.now().toString()
-    gun.get('banks').get(id).put({ cid: jsonCid.toString() })
+    gun.get('banks').get(id).put({ cid: jsonCid.toString(), owner: address ? address.toLowerCase() : null })
 
     res.json({
       success: true,
@@ -218,53 +222,4 @@ app.post("/user/banks", (req, res) => {
   setTimeout(() => res.json(banks), 500)
 })
 
-app.post("/user/upload-bank", upload.single("image"), async (req, res) => {
-  try {
-    const { address, name, description, goal, ended_at } = req.body
-    const imageBuffer = req.file.buffer
-
-    if (!address) {
-      return res.status(400).json({ success: false, error: "Missing address" })
-    }
-
-    const imageFile = new File([imageBuffer], req.file.originalname, {
-      type: req.file.mimetype
-    })
-
-    const imageCid = await client.uploadFile(imageFile)
-
-    const metadata = {
-      name,
-      description,
-      goal: parseFloat(goal),
-      ended_at,
-      image: `ipfs://${imageCid}`,
-      createdAt: new Date().toISOString()
-    }
-
-    const jsonBlob = new Blob([JSON.stringify(metadata)], { type: 'application/json' })
-    const jsonFile = new File([jsonBlob], 'bank-metadata.json')
-    const jsonCid = await client.uploadFile(jsonFile)
-
-    const bankEntry = {
-      cid: jsonCid.toString(),
-      imageCid: imageCid.toString(),
-      metadataUrl: `https://ipfs.io/ipfs/${jsonCid}`,
-      createdAt: new Date().toISOString()
-    }
-
-    gun.get('users')
-       .get(address.toLowerCase())
-       .get('banks')
-       .set(bankEntry)
-
-    return res.json({
-      success: true,
-      ...bankEntry
-    })
-  } catch (err) {
-    console.error(err)
-    res.status(500).json({ success: false, error: 'Upload failed' })
-  }
-})
 

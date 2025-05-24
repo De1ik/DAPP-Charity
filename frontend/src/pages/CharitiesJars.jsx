@@ -7,7 +7,10 @@ import { useState, useEffect } from "react";
 import "../css/charities.css"
 import { useLocation, useNavigate } from "react-router-dom";
 
-const USER_NAME = "John Doe";
+// Replace with the real user address after login
+const USER_ADDRESS = "0x123...abc".toLowerCase(); // For demo, or get from wallet/session
+
+const USER_NAME = "John Doe"; // fallback for static
 
 const charities = [
   {
@@ -46,11 +49,12 @@ const charities = [
 
 
 
-export const CharitiesCatalogPage = () => {
-  const [loading] = useState(false);
+export const CharitiesJarsPage = () => {
+  const [loading, setLoading] = useState(true);
+  const [jars, setJars] = useState([]);
   const [showProfileTabs, setShowProfileTabs] = useState(false);
   const [activeTab, setActiveTab] = useState("myjars");
-  const [showOnlyMine, setShowOnlyMine] = useState(false); // Start by showing only user's jars
+  const [showOnlyMine, setShowOnlyMine] = useState(false);
 
   const location = useLocation()
   const navigate = useNavigate()
@@ -67,14 +71,35 @@ export const CharitiesCatalogPage = () => {
     }
   }, [location.search]);
 
+  useEffect(() => {
+    setLoading(true);
+    fetch("http://localhost:8080/banks")
+      .then(res => res.json())
+      .then(data => {
+        setJars(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch(() => {
+        setJars([]);
+        setLoading(false);
+      });
+  }, []);
+
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     setShowOnlyMine(tab === "myjars");
   };
 
-  let visibleCharities = charities;
+  let jarsToShow = jars.length === 0 ? charities : jars;
+
   if (showOnlyMine) {
-    visibleCharities = charities.filter(c => c.owner === USER_NAME);
+    if (jars.length === 0) {
+      jarsToShow = charities.filter(jar => jar.owner === USER_NAME);
+    } else {
+      jarsToShow = jars.filter(jar =>
+        (jar.owner && jar.owner.toLowerCase() === USER_ADDRESS)
+      );
+    }
   }
 
   return (
@@ -91,7 +116,7 @@ export const CharitiesCatalogPage = () => {
           {loading ? (
             <div style={{ color: "#fff", gridColumn: "span 3", textAlign: "center" }}>Loading...</div>
           ) : (
-            visibleCharities.map((charity, i) => (
+            jarsToShow.map((charity, i) => (
               <CharityCard key={i} {...charity} />
             ))
           )}
