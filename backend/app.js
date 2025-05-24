@@ -66,7 +66,7 @@ app.use(express.json())
 
 app.post("/upload", upload.single("image"), async (req, res) => {
   try {
-    const { name, description, goal, ended_at, address, videoUrl } = req.body;
+    const { name, category, description, goal, deadline, address, videoUrl, status } = req.body;
     let imageCid = null, imageUrl = null;
 
     if (req.file) {
@@ -81,7 +81,9 @@ app.post("/upload", upload.single("image"), async (req, res) => {
       name,
       description,
       goal: parseFloat(goal),
-      ended_at,
+      deadline,
+      category,
+      status,
       videoUrl,
       createdAt: new Date().toISOString(),
       owner: address ? address.toLowerCase() : null,
