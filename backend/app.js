@@ -76,16 +76,17 @@ app.post("/upload", upload.single("image"), async (req, res) => {
       imageCid = await client.uploadFile(imageFile);
       imageUrl = `ipfs://${imageCid}`;
     }
+
     const metadata = {
       name,
       description,
       goal: parseFloat(goal),
       ended_at,
-      image: `ipfs://${imageCid}`,
-      videoUrl: videoUrl,
+      videoUrl,
       createdAt: new Date().toISOString(),
-      owner: address ? address.toLowerCase() : null
-    }
+      owner: address ? address.toLowerCase() : null,
+      ...(imageCid && { image: `ipfs://${imageCid}` })
+    };
 
     const jsonBlob = new Blob([JSON.stringify(metadata)], { type: 'application/json' })
     const jsonFile = new File([jsonBlob], 'bank-metadata.json')
@@ -114,10 +115,24 @@ app.post('/admin/clear-banks', (req, res) => {
   res.json({success: true, message: "All banks deleted."});
 });
 
+async function fetchIpfsMetadata(cid) {
+  const gateways = [
+    'https://ipfs.io/ipfs/',
+    'https://cloudflare-ipfs.com/ipfs/',
+    'https://dweb.link/ipfs/',
+  ];
+  for (const base of gateways) {
+    try {
+      const resp = await axios.get(`${base}${cid}`, { timeout: 4000 });
+      if (resp.status === 200 && resp.data) return resp.data;
+    } catch (e) {
+    }
+  }
+  throw new Error('Failed to fetch metadata from all gateways');
+}
 
 app.get("/banks", async (req, res) => {
   const banks = [];
-
   gun.get('banks').map().once((data, key) => {
     if (data && data.cid) banks.push({ id: key, cid: data.cid, owner: data.owner });
   });
@@ -126,8 +141,9 @@ app.get("/banks", async (req, res) => {
     const enriched = await Promise.all(
       banks.map(async bank => {
         try {
-          const resp = await axios.get(`https://ipfs.io/ipfs/${bank.cid}`);
-          return { ...bank, ...resp.data };
+          if (!bank.cid) throw new Error('Missing CID');
+          const meta = await fetchIpfsMetadata(bank.cid);
+          return { ...bank, ...meta };
         } catch (err) {
           return { ...bank, error: 'Failed to fetch metadata from IPFS' };
         }
