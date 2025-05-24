@@ -160,3 +160,38 @@ input[type="file"].form-input {
   }
 }
 
+.file-upload-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.file-upload-label {
+  display: inline-block;
+  padding: 0.8rem 1.2rem;
+  background-color: var(--input-bg);
+  border: 2px dashed var(--input-border);
+  border-radius: 1rem;
+  color: #d1d1d1;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-secondary);
+}
+
+.file-upload-label:hover {
+  border-color: var(--blue-main);
+  background-color: #1f2a36;
+}
+
+input[type="file"].hidden-input {
+  display: none;
+}
+
+.selected-file-preview {
+  color: #ccc;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+

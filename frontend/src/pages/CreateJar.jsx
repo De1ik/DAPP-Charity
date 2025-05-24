@@ -275,24 +275,32 @@ export const CreateJarPage = () => {
           <label className="form-label" htmlFor="fundraiser-photos">
             Upload fundraiser photos *
           </label>
-          <input
-            id="fundraiser-photos"
-            name="fundraiserPhotos"
-            type="file"
-            className="form-input"
-            accept="image/*"
-            multiple
-            onChange={handleInputChange}
-            required
-          />
-          <small className="form-helper">
-            You can select and upload several in one go
-          </small>
-          {errors.fundraiserPhotos && (
-            <span className="form-helper" style={{ color: "red" }}>
-              {errors.fundraiserPhotos}
-            </span>
-          )}
+          <div className="file-upload-wrapper">
+            <label htmlFor="fundraiser-photos" className="file-upload-label">
+              {form.fundraiserPhotos && form.fundraiserPhotos.length > 0
+                  ? `Selected: ${form.fundraiserPhotos[0].name}`
+                  : "Click to upload images"}
+            </label>
+            <input
+                id="fundraiser-photos"
+                name="fundraiserPhotos"
+                type="file"
+                className="hidden-input"
+                accept="image/*"
+                multiple
+                onChange={handleInputChange}
+                required
+            />
+            <small className="form-helper">
+              You can select and upload several in one go
+            </small>
+            {errors.fundraiserPhotos && (
+                <span className="form-helper" style={{ color: "red" }}>
+                  {errors.fundraiserPhotos}
+                </span>
+            )}
+          </div>
+
 
           {/* Video URL (optional) */}
           <label className="form-label" htmlFor="video-url">

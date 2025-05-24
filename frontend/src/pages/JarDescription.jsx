@@ -21,6 +21,12 @@ const DonationJar = () => {
         setShowOnlyMine(tab === "jarDescription");
     };
     useEffect(() => {
+        document.body.classList.add('donation-body');
+        return () => {
+            document.body.classList.remove('donation-body');
+        };
+    }, []);
+    useEffect(() => {
         const params = new URLSearchParams(location.search);
         const tab = params.get("tab");
         if (tab === "jarDescription") {

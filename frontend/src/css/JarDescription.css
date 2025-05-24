@@ -1,4 +1,12 @@
 
+body.donation-body {
+    background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWR5Z2I3Yjg2dTgyZ2J1YTZvdjNncGZpdndrYml3bzZvYnptcWIyaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/U3qYN8S0j3bpK/giphy.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+
 .donation-container {
     max-width: 1200px;
     margin: auto;

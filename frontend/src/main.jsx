@@ -9,7 +9,7 @@ import { CharitiesJarsPage } from './pages/CharitiesJars.jsx'
 import { UserProfile } from './pages/UserProfile.jsx'
 import DonationJar from './pages/JarDescription.jsx'
 import { WalletProvider } from './context/Wallet.jsx'
-
+import { AboutPage } from './pages/AboutPage.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -23,6 +23,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/create-jar" element={<CreateJarPage />} />
           <Route path='/profile' element={<UserProfile />} />
           <Route path='/jarDescription' element={<DonationJar/>}/>
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </BrowserRouter>
     </WalletProvider>

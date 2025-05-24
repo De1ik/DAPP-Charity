@@ -5,6 +5,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+
+  background-color: #000000;
+  border-bottom: 1px solid #90eaaa;
 }
 .nav {
   display: flex;
@@ -66,4 +70,17 @@
   padding: 16px 40px;
   min-width: 520px;
   position: relative;
+}
+.nav button {
+  all: unset; /* скидає всі стилі браузера для кнопки */
+  cursor: pointer;
+  color: #f9f8f8;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+
+.nav button:hover {
+  color: #90eaaa;
 }

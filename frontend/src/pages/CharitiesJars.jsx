@@ -114,7 +114,7 @@ export const CharitiesJarsPage = () => {
           onTabClick={handleTabClick}
         />
       )}
-      <div className="div-4">
+      <div className="div-4" >
         <div className="charities-grid">
           {loading ? (
             <div style={{ color: "#fff", gridColumn: "span 3", textAlign: "center" }}>Loading...</div>
