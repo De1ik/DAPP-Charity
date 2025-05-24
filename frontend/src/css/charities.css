@@ -1,135 +1,144 @@
-body {
-  margin: 0;
-  padding: 0;
-
-  font-family: 'Segoe UI', sans-serif;
-  color: #e0e0e0;
+.charities-catalog .div-4 {
   background-color: #1a1a1a;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
-.donation-content {
-  display: flex;
-  justify-content: center; /* Центрує блок по горизонталі */
-  gap: 3rem;
-  padding: 2rem;
-  flex-wrap: wrap;
-}
-.jar-section {
-  max-width: 500px;
-  margin-right: 40px;
+.charities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 48px 40px; /* row gap, column gap */
+  justify-items: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding-top: 20px; /* Adjust for your header/title */
+  padding-bottom: 40px;
   width: 100%;
+}
+
+.catalog-view-more-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.catalog-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.catalog-tab {
+  font-size: 2.1rem;
+  color: #666;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.catalog-tab-active {
+  color: #41b9e4;
+  border-bottom: 4px solid #41b9e4;
+  padding-bottom: 6px;
+}
+
+.charities-catalog .text-wrapper-25.catalog-header {
+  font-size: 96px;
+  font-weight: 700;
+  background: radial-gradient(50% 50% at 50% 50%, #90eaaa 0%, #41b9e4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  margin: 80px 0 0 0;
+  letter-spacing: 2.88px;
+}
+
+.charities-catalog .donate-button-10 {
+  height: 59px;
+  left: 641px;
+  position: absolute;
+  top: 1806px;
+  width: 177px;
+}
+
+.charities-catalog {
+  background-color: #1a1a1a;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-}
-
-.jar-image {
-  /*width: 300px ;*/
-  width: 250px !important;
-  height: auto;
-  margin-bottom: 20px;
-  margin-top: 100px;
-}
-
-.progress-bar {
   width: 100%;
-  height: 20px;
-  background: #333;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: inset 0 1px 4px rgba(0, 255, 204, 0.2);
 }
 
-.progress-fill {
-  background: linear-gradient(to right, #41b9e4, #90eaaa);
-  height: 100%;
-  transition: width 0.4s ease-in-out;
+.charity-status-badge {
+  margin-bottom: 10px;
+  align-self: flex-start;
+  padding: 4px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  /* Remove absolute/positioning */
+  position: static;
+  left: unset;
+  top: unset;
+  z-index: 1;
 }
 
-.progress-text {
-  margin-top: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #90eaaa;
-}
 
-.form-section {
-  flex: 2;
+.charity-card {
   background: #222;
-  padding: 2rem;
   border-radius: 18px;
   border: 2px solid #41b9e4;
+  padding: 32px 24px 24px 24px;
   box-shadow: 0 4px 28px #2be9ff0e;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 320px;
-  height: 420px;
-  min-height: 420px;
+  align-items: flex-start;
+  width: 320px;       /* Or whatever size fits your grid! */
+  height: 420px;      /* Make all cards the same height */
+  min-height: 420px;  /* Optional: ensures all cards stay at least this tall */
   position: relative;
   overflow: visible;
   transition: box-shadow 0.2s;
-  text-align: center;
 }
 
-.donation-form select,
-.donation-form input,
-.donation-form textarea {
-  width: 100%;
-  margin-bottom: 1rem;
-  padding: 0.75rem;
-  border-radius: 10px;
-  border: 1px solid #41b9e4;
-  background: #1a1a1a;
+.charity-card:hover {
+  box-shadow: 0 6px 40px #41b9e4aa;
+}
+
+.charity-image {
+  width: 88px;
+  height: 88px;
+  margin-bottom: 24px;
+  align-self: center;
+}
+
+.charity-title {
+  font-size: 1.28rem;
+  font-weight: bold;
   color: #fff;
   margin-bottom: 16px;
-  align-self: center;
-  text-align: center;
 }
 
 .charity-description {
   font-size: 1rem;
+  color: #bdbdbd;
+  margin-bottom: 24px;
 }
 
-.donation-form textarea {
-  resize: vertical;
-  min-height: 100px;
-}
 
-.privacy-options {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  color: #ccc;
-}
 
-.info-box {
-  background: #2a2a2a;
-  padding: 1rem;
-  border-radius: 10px;
-  color: #bbb;
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
-}
-
-.donation-summary {
-  background: #111;
-  padding: 1.5rem;
-  border-radius: 14px;
-  text-align: center;
-  border: 2px solid #90eaaa;
-}
-
-.donation-summary h5 {
-  color: #90eaaa;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.donation-summary .amount {
-  font-size: 1.8rem;
+.charity-donate-button {
+  font-size: 1rem;
   font-weight: bold;
   color: #fff;
   border: none;
@@ -137,113 +146,35 @@ body {
   padding: 10px 24px;
   cursor: pointer;
   transition: background 0.15s;
-  align-self: center;
-  margin-top: auto;
 }
 
-.donation-summary .amount span {
-  font-size: 0.9rem;
-  color: #bbb;
+.charity-donate-button[style*="red"] {
+  background: #ff1c1c;
 }
 
-.continue-btn {
-  background: #1db4ff;
-  color: #fff;
-  border: none;
-  padding: 0.8rem 2rem;
-  border-radius: 10px;
+.catalog-view-more {
+  font-size: 1.2rem;
   font-weight: bold;
-  font-size: 1rem;
+  color: #222;
+  background: #1db4ff;
+  padding: 12px 36px;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.18s;
 }
 
-.continue-btn:hover {
+.catalog-view-more:hover {
   background: #90eaaa;
 }
 
-.terms {
-  font-size: 0.8rem;
-  color: #888;
-  margin-top: 1rem;
+@media (max-width: 1000px) {
+  .charities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-
-.terms a {
-  color: #41b9e4;
-  text-decoration: underline;
-}
-
-.jar-description-tabs {
-  margin-top: 2rem;
-  background-color: #1a1a1a;
-  padding: 1rem;
-  border-radius: 8px;
-  width: 100%;
-  color: #ccc;
-}
-
-.tabs {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.tabs button {
-  background: none;
-  border: none;
-  color: #aaa;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-bottom: 2px solid transparent;
-}
-
-.tabs button.active {
-  color: #00bfff;
-  border-color: #00bfff;
-}
-
-.jar-description-content h3 {
-  margin-bottom: 0.5rem;
-  color: #fff;
-}
-
-.jar-description-content p {
-  line-height: 1.5;
-  color: #ccc;
-}
-
-.privacy-options {
-  display: flex;
-  gap: 1rem;
-}
-.radio-tile {
-  border: 2px solid #41b9e4;
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
-  cursor: pointer;
-  flex: 1;
-  background: #1f1f1f;
-  transition: 0.3s;
-  position: relative;
-  color: #e0e0e0;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(0, 255, 255, 0.1);
-}
-
-.radio-tile:hover {
-  background: #252525;
-  border-color: #90eaaa;
-}
-
-.radio-tile input[type="radio"] {
-  display: none;
-}
-
-.radio-tile:has(input[type="radio"]:checked) {
-  border-color: #00bfff;
-  background: linear-gradient(135deg, #1b1f2b, #003b5e);
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
+@media (max-width: 700px) {
+  .charities-grid {
+    grid-template-columns: 1fr;
+  }
 }

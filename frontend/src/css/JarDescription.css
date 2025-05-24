@@ -1,36 +1,7 @@
-/* DonationJar.css */
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    color: #e0e0e0;
-    background: #111;
-}
 
 .donation-container {
     max-width: 1200px;
     margin: auto;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: #000;
-    border-bottom: 2px solid #00ffcc;
-}
-
-.logo {
-    font-size: 1.5rem;
-    color: #00ffcc;
-    font-weight: bold;
-}
-
-.navbar nav a {
-    margin: 0 10px;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
 }
 
 .donation-content {
@@ -139,29 +110,234 @@ body {
     margin-top: 1rem;
 }
 
-.footer {
-    background: #000;
-    color: #999;
-    padding: 2rem;
-    text-align: center;
-    margin-top: 2rem;
+.donation-content {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+.jar-section {
+  max-width: 500px;
+  margin-right: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.planet-img {
-    width: 80px;
-    margin-bottom: 1rem;
+.jar-image {
+  /*width: 300px ;*/
+  width: 250px !important;
+  height: auto;
+  margin-bottom: 20px;
+  margin-top: 100px;
 }
 
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-top: 1rem;
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 4px rgba(0, 255, 204, 0.2);
 }
 
-.footer-links a {
-    display: block;
-    color: #999;
-    text-decoration: none;
-    margin-bottom: 0.5rem;
+.progress-fill {
+  background: linear-gradient(to right, #41b9e4, #90eaaa);
+  height: 100%;
+  transition: width 0.4s ease-in-out;
+}
+
+.progress-text {
+  margin-top: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #90eaaa;
+}
+
+.form-section {
+  flex: 2;
+  background: #222;
+  padding: 2rem;
+  border-radius: 18px;
+  border: 2px solid #41b9e4;
+  box-shadow: 0 4px 28px #2be9ff0e;
+  max-width: 600px;
+}
+
+.м h2 {
+  color: #41b9e4;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.form-section p {
+  color: #ccc;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.donation-form select,
+.donation-form input,
+.donation-form textarea {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #41b9e4;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.donation-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.privacy-options {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: #ccc;
+}
+
+.info-box {
+  background: #2a2a2a;
+  padding: 1rem;
+  border-radius: 10px;
+  color: #bbb;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.donation-summary {
+  background: #111;
+  padding: 1.5rem;
+  border-radius: 14px;
+  text-align: center;
+  border: 2px solid #90eaaa;
+}
+
+.donation-summary h5 {
+  color: #90eaaa;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.donation-summary .amount {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.donation-summary .amount span {
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.continue-btn {
+  background: #1db4ff;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.continue-btn:hover {
+  background: #90eaaa;
+}
+
+.terms {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 1rem;
+}
+
+.terms a {
+  color: #41b9e4;
+  text-decoration: underline;
+}
+
+.jar-description-tabs {
+  margin-top: 2rem;
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  color: #ccc;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tabs button {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid transparent;
+}
+
+.tabs button.active {
+  color: #00bfff;
+  border-color: #00bfff;
+}
+
+.jar-description-content h3 {
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.jar-description-content p {
+  line-height: 1.5;
+  color: #ccc;
+}
+
+.privacy-options {
+  display: flex;
+  gap: 1rem;
+}
+.radio-tile {
+  border: 2px solid #41b9e4;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  flex: 1;
+  background: #1f1f1f;
+  transition: 0.3s;
+  position: relative;
+  color: #e0e0e0;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 255, 255, 0.1);
+}
+
+.radio-tile:hover {
+  background: #252525;
+  border-color: #90eaaa;
+}
+
+.radio-tile input[type="radio"] {
+  display: none;
+}
+
+.radio-tile:has(input[type="radio"]:checked) {
+  border-color: #00bfff;
+  background: linear-gradient(135deg, #1b1f2b, #003b5e);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
 }

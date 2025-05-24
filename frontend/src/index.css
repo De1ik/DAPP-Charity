@@ -40,6 +40,13 @@
   --variable-collection-text2: rgba(97, 97, 97, 1);
   --variable-collection-text3: rgba(46, 46, 46, 1);
 
+    --background-dark: #1a1a1a;
+  --primary-green: #90eaab;
+  --primary-blue: #41b9e4;
+  --primary-bg-gradient: linear-gradient(135deg, #2a353a 0%, #21323c 80%);
+  --box-bg: rgba(32, 40, 44, 0.85);
+  --box-shadow: 0 0 20px 0 #90eaab55;
+  --font-main: "Poppins", Helvetica, Arial, sans-serif;
 }
 
 body, html {

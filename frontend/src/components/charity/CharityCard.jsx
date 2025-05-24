@@ -1,5 +1,3 @@
-import React from "react";
-
 const statusMap = {
   waiting_approval: { text: "Waiting for approvment", color: "#ffe600", textColor: "#222" },
   waiting: { text: "Waiting...", color: "#ffe600", textColor: "#222" },
@@ -13,7 +11,7 @@ export const CharityCard = ({
   description,
   buttonColor = "#1DB4FF",
   status,
-                                onDonate,
+  onDonate,
 }) => {
   const badge = statusMap[status];
   return (
